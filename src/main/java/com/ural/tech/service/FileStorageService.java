@@ -37,7 +37,7 @@ public class FileStorageService implements FileStorageRepository {
     }
 
     @Override
-    public String save(MultipartFile multipartFile) {
+    public Path save(MultipartFile multipartFile) {
         if (!Files.exists(this.path)) {
             this.init();
         }
@@ -63,7 +63,7 @@ public class FileStorageService implements FileStorageRepository {
             System.out.println(newPath);
             Files.copy(multipartFile.getInputStream(), newPath);
             log.info("Сохраняем файл" + multipartFile.getOriginalFilename());
-            return newFileName;
+            return newPath;
         } catch (IOException e) {
             log.error("Невозможно сохранить файл" + multipartFile.getOriginalFilename());
             throw new RuntimeException("Could not store this file. Error" + e.getMessage());

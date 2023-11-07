@@ -8,6 +8,7 @@ import com.ural.tech.store.PointsRepository;
 import com.ural.tech.utils.Status;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,7 @@ public class PointService {
         for (int i = realOffset; i < realLimit; i++) {
             Points point = pointEntities.get(i);
 
-            PointResponse pointResponse = new PointResponse(point.getId(),point.getStatus(), point.getPointCoordinates(), point.getDescription());
+            PointResponse pointResponse = new PointResponse(point.getId(),point.getStatus(), point.getPointCoordinates(), point.getDescription(),point.getCreatedAt(),point.getUrlImage());
             pointResponses.add(pointResponse);
         }
 
@@ -74,6 +75,13 @@ public class PointService {
     public Points save(Status status, PointRequest request) {
         //todo ограчение на сохренния на координаты или на ?
         Points point = new Points(status.getStatus(), request.getPointCoordinates(), request.getDescription());
+
+        return pointsRepository.save(point);
+    }
+
+    public Points save(Status status, PointRequest request, Path urlImage) {
+        //todo ограчение на сохренния на координаты или на ?
+        Points point = new Points(status.getStatus(), request.getPointCoordinates(), request.getDescription(),urlImage.toString());
 
         return pointsRepository.save(point);
     }

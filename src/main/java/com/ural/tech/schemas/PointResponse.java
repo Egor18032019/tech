@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
+
 
 @Getter
 @Setter
@@ -22,6 +24,8 @@ public class PointResponse {
     String coordinates; //point: [56.800584, 60.675637]}
     @Schema(description = "Описание проблемы")
     String description; // "яма на дороге"
-//    @Schema(description = "Время создание обращение")
-//    Date dateComplete; //
+    @Schema(description = "Время создание обращение")
+    Instant dateComplete; //
+    @Schema(description = "путь к файлу сохраненому на сервере")
+    String pathToImage; //
 }
