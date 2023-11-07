@@ -11,9 +11,8 @@ services:
     depends_on:
       - db
     environment:
-      - URL_FRONT_API={egor.front.url}
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
@@ -25,5 +24,5 @@ services:
     expose:  # если наружу не надо
       - 5432
     environment:
-      - POSTGRES_USER=compose-postgres
+      - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
