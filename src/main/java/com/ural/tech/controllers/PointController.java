@@ -18,9 +18,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.nio.file.Path;
 import java.util.Optional;
 
 @Tag(name = "Создание и обработка заявок.(изменение)")
@@ -45,16 +43,23 @@ public class PointController {
     )
     @PostMapping(value = EndPoint.creatPoint)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public PointResponse handleFileUpload2(@RequestParam("pointCoordinates") String pointCoordinates,
-                                           @RequestParam("description") String description,
-                                           @RequestParam(value = "file", required = false) MultipartFile file) {
+    public PointResponse handleFileUpload(@RequestParam("pointCoordinates") String pointCoordinates,
+                                          @RequestParam("description") String description,
+                                          @RequestParam(value = "file", required = false) MultipartFile file) {
         //todo проверка координат
         Status status = Status.GREAT;
         PointRequest request = new PointRequest(pointCoordinates, description);
-        Points pointFromBD = pointService.save(status, request);
-        if (file != null) fileStorageService.save(file);
+        Points pointFromBD;
+        if (file != null && !file.isEmpty()) {
 
-        return new PointResponse(pointFromBD.getId(), status.toString(), request.getPointCoordinates(), request.getDescription());
+            Path pathToImage = fileStorageService.save(file);
+            pointFromBD = pointService.save(status, request, pathToImage);
+        } else {
+
+            pointFromBD = pointService.save(status, request);
+        }
+
+        return new PointResponse(pointFromBD.getId(), status.toString(), pointFromBD.getPointCoordinates(), pointFromBD.getDescription(), pointFromBD.getCreatedAt(), pointFromBD.getUrlImage());
 
     }
 

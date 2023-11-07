@@ -20,16 +20,16 @@ const BranchesMap = () => {
         type UserLocationData = number[];
         const [user, setUser] = useState<UserLocationData | null>(userLocation);
         // const [places, setPlaces] = useState<PointsData[] | null>(branches);
-//TODO сделать что бы поинт можно было перемещать
-//TODO строительства маршрута к оптимальному отделению сразу же
+
 
         const handleFindAllBranch = async () => {
 
-            const response = await fetch("http://localhost:8080/api/all?coordinates=60.497874,56.926760", {
+
+            const response = await fetch("api/all?coordinates=60.497874,56.926760", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "http://localhost:8080/api/all",
+                    "Access-Control-Allow-Origin":  "*",
                     "Access-Control-Allow-Credentials": "true",
                     "Access-Control-Allow-Methods": "GET",
                 }
@@ -39,16 +39,11 @@ const BranchesMap = () => {
 
             const data = await response.json();
 
-
-            console.log(setPoints)
-
             console.log("handleFindAllBranch")
             if (setPoints) {
-                // data.points.coordinates =  data.points.coordinates.slice(1, data.points.coordinates.length - 1).split(",").map(Number).reverse()
                 for (let i = 0; i < data.points.length; i++) {
                     data.points[i].coordinates = data.points[i].coordinates.slice(0, data.points[i].coordinates.length - 1).split(",").map(Number)
                     console.log(data.points[i].coordinates)
-
                 }
                 setPoints(data.points)
             }
@@ -57,11 +52,8 @@ const BranchesMap = () => {
         };
 //todo убрать
         const handleFindUser = async () => {
-
             setUser(userLocation);
-
         };
-
 
         return (
             <div>
@@ -119,8 +111,6 @@ const BranchesMap = () => {
 
                         {/* Отображение отделений */}
                         {points && points.map((i) => (
-
-
                             <Placemark
                                 key={i.id}
                                 geometry={i.coordinates}
@@ -169,7 +159,7 @@ const BranchesMap = () => {
                 </YMaps>
 
                 <div> Всего
-                    поинтов {points ? points.length  : 0} </div>
+                    поинтов {points ? points.length : 0} </div>
                 {/*<div> Всего places {places ? places.length + "  " + places[0].id + places[0].description + places[0].coordinates : 0} </div>*/}
             </div>
         )

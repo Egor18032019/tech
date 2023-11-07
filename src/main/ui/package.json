@@ -1,5 +1,5 @@
 {
-  "name": "vtb-hack",
+  "name": "tech-hack",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,7 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start - uses .env",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

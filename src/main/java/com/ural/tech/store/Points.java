@@ -2,11 +2,15 @@ package com.ural.tech.store;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.Instant;
 
 @Entity
 @Table(name = "status")
+@Getter
+@Setter
 public class Points {
 
     public static final int START_SEQ = 10;
@@ -21,6 +25,8 @@ public class Points {
     String pointCoordinates;
     @Column()
     String description;
+    @Column()
+    String urlImage;
 
     //todo сылка на файл в виде строки
 
@@ -36,23 +42,10 @@ public class Points {
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getPointCoordinates() {
-        return pointCoordinates;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
+    public Points(String status, String pointCoordinates, String description, String urlImage) {
+        this.status = status;
+        this.pointCoordinates = pointCoordinates;
+        this.description = description;
+        this.urlImage = urlImage;
     }
 }

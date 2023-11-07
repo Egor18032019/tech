@@ -1,26 +1,29 @@
-version: '2'
+version: '2.4'
 
 services:
   app:
-    image: client:0.0.4
+    #image: client:0.0.4  # либо image, либо build
     build:
       context: .
     container_name: app
     ports:
-      - "8080:8080"
+      - "${HTTP_HOST_PORT}:8080"
     depends_on:
       - db
     environment:
+      - URL_FRONT_API={egor.front.url}
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
       - SPRING_DATASOURCE_USERNAME=compose-postgres
-      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   db:
-    image: 'postgres:13.1-alpine'
+    image: 'postgres:13-alpine'
     container_name: db
-    ports:
-      - "5432:5432"
+#    ports:
+#      - "5432:5432"
+    expose:  # если наружу не надо
+      - 5432
     environment:
       - POSTGRES_USER=compose-postgres
-      - POSTGRES_PASSWORD=compose-postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD}

@@ -10,7 +10,7 @@ public interface FileStorageRepository {
 
     void init();
 
-    String save(MultipartFile multipartFile);
+    Path save(MultipartFile multipartFile);
 
     Resource load(String fileName);
 
