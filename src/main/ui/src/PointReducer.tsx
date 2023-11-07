@@ -21,8 +21,8 @@ type PointsData = {
 interface stateTownProvider {
     page: string,
     isDataLoaded: boolean,
-    point: PointsData,
-    points: PointsData[],
+    point: PointsData | {},
+    points: PointsData[] | [],
     originalPoints: [],
 }
 
@@ -60,14 +60,18 @@ const TownProvider = ({children}) => {
         { // первоначальный стайт
             page: "first",
             isDataLoaded: false,
-            point: {id: 1, status: "Great", description: "Отделение 1", coordinates: [56.926760, 60.70]},
-            points: [{id: 1, status: "Great", description: "Отделение 1", coordinates: [56.926760, 60.70]}],
+            point: {},
+            points: [],
             originalPoints: [],
         });
 
 
     const setPoint = (payload: {}) => dispatch({type: ActionType.CHOOSE_POINT, payload});
-    const setPoints = (payload: PointsData[]) => dispatch({type: ActionType.ADD_POINTS, payload});
+    const setPoints = (payload: PointsData[]) => {
+
+
+        dispatch({type: ActionType.ADD_POINTS, payload});
+    };
     const setOriginalPoints = (payload: PointsData[]) => dispatch({type: ActionType.FILTER_POINT, payload});
 
     const setDataLoaded = (payload: boolean) => dispatch({type: ActionType.GET_SERVER_STATUS, payload});

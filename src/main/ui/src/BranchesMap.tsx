@@ -6,7 +6,7 @@ import {useContextMap} from "./PointReducer";
 const BranchesMap = () => {
         const {point, points, originalPoints, setPoints, setOriginalPoints, setDataLoaded} = useContextMap();
         let branches = [
-            {id: 1, status: "Great", description: "Отделение 1", coordinates: [56.926760, 60.71]}]
+            {id: 1, status: "Great", description: "Отделение 1", coordinates: []}]
 
         type PointsData = {
             id: number;
@@ -19,14 +19,10 @@ const BranchesMap = () => {
         const userLocation = [60.497874, 56.926761];
         type UserLocationData = number[];
         const [user, setUser] = useState<UserLocationData | null>(userLocation);
-        const [places, setPlaces] = useState<PointsData[] | null>(branches);
+        // const [places, setPlaces] = useState<PointsData[] | null>(branches);
 //TODO сделать что бы поинт можно было перемещать
 //TODO строительства маршрута к оптимальному отделению сразу же
-        useEffect(() => {
-            console.log(`Я слежу за points`);
-            // @ts-ignore
-            setPlaces(points)
-        }, [points]);
+
         const handleFindAllBranch = async () => {
 
             const response = await fetch("http://localhost:8080/api/all?coordinates=60.497874,56.926760", {
@@ -40,19 +36,23 @@ const BranchesMap = () => {
 
             });
 //todo убрать лишнее limit and ofset
+
             const data = await response.json();
 
-            console.log(useContextMap)
+
             console.log(setPoints)
 
             console.log("handleFindAllBranch")
             if (setPoints) {
+                // data.points.coordinates =  data.points.coordinates.slice(1, data.points.coordinates.length - 1).split(",").map(Number).reverse()
+                for (let i = 0; i < data.points.length; i++) {
+                    data.points[i].coordinates = data.points[i].coordinates.slice(0, data.points[i].coordinates.length - 1).split(",").map(Number)
+                    console.log(data.points[i].coordinates)
+
+                }
                 setPoints(data.points)
             }
 
-
-            // @ts-ignore
-            setPlaces(points)
 
         };
 //todo убрать
@@ -76,20 +76,27 @@ const BranchesMap = () => {
                             center: userLocation, zoom: 10,
                             // включаем модули, отвечающие за всплывающие окна над геообъектами
                             // @ts-ignore
-                            modules:  ['geoObject.addon.balloon', 'geoObject.addon.hint']
+                            modules: ['geoObject.addon.balloon', 'geoObject.addon.hint']
                         }}
                         width="400px"
                         height="400px"
-                        draggable={true}
                         onDrag={() => {
                             console.log("onDrag");
+                        }}
+                        onLoad={() => {
+                            console.log("onLoad");
+                            handleFindAllBranch()
                         }}
                     >
                         {/* Отображение местоположения пользователя */}
                         <Placemark
+                            key={"me"}
                             draggable={true}
                             geometry={userLocation.reverse()} // перевернул координаты !
-                            properties={{hintContent: "Вы здесь"}}
+                            properties={{
+                                draggable: true,
+                                hintContent: "Вы здесь"
+                            }}
                             options={{preset: "islands#blueCircleIcon"}}
                             onClick={() => {
                                 console.log(userLocation.reverse());
@@ -119,8 +126,14 @@ const BranchesMap = () => {
                                 geometry={i.coordinates}
                                 properties={{
                                     hintContent: i.description,
-                                    balloonContent: `Белое всплывающие окошко с описанием которое почему то не отображаеться если есть ниже следующие`,
-                                    balloonContentHeader: `<strong>Какой то заголовок</strong>`,
+                                    balloonContent: `
+        <div class="balloon">
+            <div class="balloon__address">Яма ЕКБ</div>
+            <div class="balloon__contacts">
+            <a href = "tel: 79678347101">+79678347101<a/>
+            </div>
+        </div>
+    `, balloonContentHeader: `<strong>Какой то заголовок</strong>`,
                                     balloonContentBody: `Содержимое <em>балуна</em>`,
                                     balloonContentFooter: `<p><strong>Веб-сайт:</strong> <a rel="nofollow" href="#" target="_blank">перейти</a></p>`
                                 }}
@@ -156,9 +169,8 @@ const BranchesMap = () => {
                 </YMaps>
 
                 <div> Всего
-                    поинтов {points ? points.length + "  " + points[0].id + points[0].description + points[0].coordinates : 0} </div>
-                <div> Всего
-                    places {places ? places.length + "  " + places[0].id + places[0].description + places[0].coordinates : 0} </div>
+                    поинтов {points ? points.length  : 0} </div>
+                {/*<div> Всего places {places ? places.length + "  " + places[0].id + places[0].description + places[0].coordinates : 0} </div>*/}
             </div>
         )
             ;

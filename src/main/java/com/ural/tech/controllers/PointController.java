@@ -43,7 +43,6 @@ public class PointController {
                     "Отдает создали или нет"
 
     )
-
     @PostMapping(value = EndPoint.creatPoint)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public PointResponse handleFileUpload2(@RequestParam("pointCoordinates") String pointCoordinates,
