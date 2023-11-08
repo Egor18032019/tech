@@ -11,6 +11,7 @@ type ContextProps = {
     setDataLoaded: (isDataLoaded: boolean) => void,
 
 };
+//todo добавить imageUrl
 type PointsData = {
     id: number;
     status: string;
@@ -48,7 +49,10 @@ const reducer = (state: stateTownProvider, action: reduceAction) => {
             return Object.assign({}, state, {
                 points: action.payload,
             });
-
+        case ActionType.CHOOSE_POINT:
+            return Object.assign({}, state, {
+                point: action.payload,
+            });
         default:
             return state;
     }

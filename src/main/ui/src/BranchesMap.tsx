@@ -4,7 +4,7 @@ import {YMaps, Map, Placemark} from "@pbe/react-yandex-maps";
 import {useContextMap} from "./PointReducer";
 
 const BranchesMap = () => {
-        const {point, points, originalPoints, setPoints, setOriginalPoints, setDataLoaded} = useContextMap();
+        const {point, points, originalPoints,setPoint, setPoints, setOriginalPoints, setDataLoaded} = useContextMap();
         let branches = [
             {id: 1, status: "Great", description: "Отделение 1", coordinates: []}]
 
@@ -14,22 +14,22 @@ const BranchesMap = () => {
             description: string;
             coordinates: number[];
         };
-
+        const url = " http://localhost:8080/";
 
         const userLocation = [60.497874, 56.926761];
         type UserLocationData = number[];
         const [user, setUser] = useState<UserLocationData | null>(userLocation);
-        // const [places, setPlaces] = useState<PointsData[] | null>(branches);
+
 
 
         const handleFindAllBranch = async () => {
 
 
-            const response = await fetch("api/all?coordinates=60.497874,56.926760", {
+            const response = await fetch(url + "api/all?coordinates=60.497874,56.926760", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin":  "*",
+                    "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Credentials": "true",
                     "Access-Control-Allow-Methods": "GET",
                 }
@@ -115,20 +115,13 @@ const BranchesMap = () => {
                                 key={i.id}
                                 geometry={i.coordinates}
                                 properties={{
-                                    hintContent: i.description,
-                                    balloonContent: `
-        <div class="balloon">
-            <div class="balloon__address">Яма ЕКБ</div>
-            <div class="balloon__contacts">
-            <a href = "tel: 79678347101">+79678347101<a/>
-            </div>
-        </div>
-    `, balloonContentHeader: `<strong>Какой то заголовок</strong>`,
-                                    balloonContentBody: `Содержимое <em>балуна</em>`,
-                                    balloonContentFooter: `<p><strong>Веб-сайт:</strong> <a rel="nofollow" href="#" target="_blank">перейти</a></p>`
+                                    hintContent: i.description
                                 }}
 
                                 onClick={() => {
+                                    if (setPoint) {
+                                        setPoint(i)
+                                    }
                                     console.log(i.description);
                                 }}
                                 // onMouseEnter={() => {
@@ -158,8 +151,7 @@ const BranchesMap = () => {
 
                 </YMaps>
 
-                <div> Всего
-                    поинтов {points ? points.length : 0} </div>
+                <div> Всего поинтов {points ? points.length : 0} </div>
                 {/*<div> Всего places {places ? places.length + "  " + places[0].id + places[0].description + places[0].coordinates : 0} </div>*/}
             </div>
         )
