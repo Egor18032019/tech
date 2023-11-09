@@ -15,9 +15,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -53,6 +56,7 @@ public class PointController {
         if (file != null && !file.isEmpty()) {
 
             Path pathToImage = fileStorageService.save(file);
+            System.out.println("pathToImage " + pathToImage);
             pointFromBD = pointService.save(status, request, pathToImage);
         } else {
 
@@ -73,5 +77,16 @@ public class PointController {
         return pointService.getAllPointForResponse(coordinates, limit, offset);
     }
 
+    @GetMapping(value = EndPoint.image,
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
+    public byte[] getImageForFront(@RequestParam String name) {
+        Resource image = fileStorageService.load(name);
+        try {
+            return image.getContentAsByteArray();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

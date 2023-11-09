@@ -23,10 +23,11 @@ import java.util.stream.Stream;
 public class FileStorageService implements FileStorageRepository {
     static final Logger log =
             LoggerFactory.getLogger(FileStorageService.class);
-    private final Path path =  Paths.get(System.getProperty("user.dir") + "/fileStorage");
-
+    private final Path path = Paths.get(System.getProperty("user.dir") + "/fileStorage");
+//todo может фронту дать ендпонит с которого он будет тащить файл по названию? /src/main/resources/static/
     @Override
     public void init() {
+        // при инициализации каталога в директории resources выдает ошибку
         try {
             Files.createDirectory(path);
             log.info("Инициализация каталога " + path);
@@ -57,13 +58,14 @@ public class FileStorageService implements FileStorageRepository {
             for (int i = 0; i < 10; i++) {
                 text[i] = characters.charAt(rng.nextInt(characters.length()));
             }
-            String newFileName = new String(text)+"."+extension;
+            String newFileName = new String(text) + "." + extension;
 
             Path newPath = Path.of(String.valueOf(this.path), newFileName);
-            System.out.println(newPath);
             Files.copy(multipartFile.getInputStream(), newPath);
+            System.out.println(newPath.getFileName());
+
             log.info("Сохраняем файл" + multipartFile.getOriginalFilename());
-            return newPath;
+            return newPath.getFileName();
         } catch (IOException e) {
             log.error("Невозможно сохранить файл" + multipartFile.getOriginalFilename());
             throw new RuntimeException("Could not store this file. Error" + e.getMessage());
@@ -90,7 +92,7 @@ public class FileStorageService implements FileStorageRepository {
     @Override
     public Stream<Path> load() {
         try {
-            return Files.walk(this.path,1)
+            return Files.walk(this.path, 1)
                     .filter(path -> !path.equals(this.path))
                     .map(this.path::relativize);
         } catch (IOException e) {
@@ -101,6 +103,8 @@ public class FileStorageService implements FileStorageRepository {
 
     @Override
     public void clear() {
+        System.out.println("чистим хранилище");
         FileSystemUtils.deleteRecursively(path.toFile());
+        //todo когда нужно чистить данные ?
     }
 }
