@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useContext, useReducer} from 'react';
 
 type ContextProps = {
-    point: {},
+    point: {} | null,
     points: PointsData[],
     originalPoints: [],
     setPoint: (point: {}) => void,
@@ -17,19 +17,21 @@ type PointsData = {
     status: string;
     description: string;
     coordinates: number[];
+    urlImage: string;
+    createdAt: string;// date
 };
 
 interface stateTownProvider {
     page: string,
     isDataLoaded: boolean,
-    point: PointsData | {},
+    point: PointsData | null,
     points: PointsData[] | [],
     originalPoints: [],
 }
 
 interface reduceAction {
     type: string,
-    payload: {} | PointsData[]
+    payload: {} | PointsData[] | null
 }
 
 const TownContext = React.createContext<Partial<ContextProps>>({}); //передаем пустой обьект
@@ -64,7 +66,7 @@ const TownProvider = ({children}) => {
         { // первоначальный стайт
             page: "first",
             isDataLoaded: false,
-            point: {},
+            point: null,
             points: [],
             originalPoints: [],
         });

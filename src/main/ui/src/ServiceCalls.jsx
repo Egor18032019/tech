@@ -1,5 +1,6 @@
 const sendPost = async (route, formData) => {
-    const url = " http://localhost:8080";
+    // const url = "http://localhost:8080";
+    const url = "";
     try {
         const response = await fetch(url + `/api/${route}`, {
             method: 'POST',

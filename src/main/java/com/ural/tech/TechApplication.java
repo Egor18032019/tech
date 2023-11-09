@@ -15,12 +15,12 @@ public class TechApplication {
         SpringApplication.run(TechApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner start(FileUploadConfiguration fileUploadConfiguration) {
-        return (args) -> {
-            fileUploadConfiguration.run();
-        };
-    }
+//    @Bean
+//    public CommandLineRunner start(FileUploadConfiguration fileUploadConfiguration) {
+//        return (args) -> {
+//            fileUploadConfiguration.run();
+//        };
+//    }
 
 
 //    @Bean
