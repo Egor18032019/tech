@@ -20,7 +20,14 @@ type PointsData = {
     urlImage: string;
     createdAt: string;// date
 };
-
+const pointForFront = {
+    id: 1,
+    status: "great",
+    description: "Описане проблемы. все плохо спасите",
+    coordinates:  [60.444, 56.93333],
+    urlImage: "9rhqikxtsp.png",
+    createdAt: "22.09.2023",// date
+}
 interface stateTownProvider {
     page: string,
     isDataLoaded: boolean,
@@ -66,7 +73,7 @@ const TownProvider = ({children}) => {
         { // первоначальный стайт
             page: "first",
             isDataLoaded: false,
-            point: null,
+            point: pointForFront,
             points: [],
             originalPoints: [],
         });

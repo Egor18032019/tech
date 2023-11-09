@@ -24,31 +24,31 @@ const BranchesMap = () => {
 
 
     const handleFindAllBranch = async () => {
-        const response = await fetch(url + "api/all?coordinates=60.497874,56.926760", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": "true",
-                "Access-Control-Allow-Methods": "GET",
-            }
-
-        });
-//todo убрать лишнее limit and ofset
-
-        const data = await response.json();
-
-        console.log("handleFindAllBranch")
-        if (setPoints) {
-            for (let i = 0; i < data.points.length; i++) {
-                data.points[i].coordinates = data.points[i].coordinates.slice(0, data.points[i].coordinates.length - 1).split(",").map(Number)
-                console.log(data.points[i].coordinates)
-            }
-            setPoints(data.points)
-        }
-        if (setOriginalPoints) {
-            setOriginalPoints(data.points)
-        }
+//         const response = await fetch(url + "api/all?coordinates=60.497874,56.926760", {
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Access-Control-Allow-Origin": "*",
+//                 "Access-Control-Allow-Credentials": "true",
+//                 "Access-Control-Allow-Methods": "GET",
+//             }
+//
+//         });
+// //todo убрать лишнее limit and ofset
+//
+//         const data = await response.json();
+//
+//         console.log("handleFindAllBranch")
+//         if (setPoints) {
+//             for (let i = 0; i < data.points.length; i++) {
+//                 data.points[i].coordinates = data.points[i].coordinates.slice(0, data.points[i].coordinates.length - 1).split(",").map(Number)
+//                 console.log(data.points[i].coordinates)
+//             }
+//             setPoints(data.points)
+//         }
+//         if (setOriginalPoints) {
+//             setOriginalPoints(data.points)
+//         }
     };
 //todo запрос на получение гео позиции
     const handleFindUser = async () => {
