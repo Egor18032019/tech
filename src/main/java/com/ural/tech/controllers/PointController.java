@@ -40,8 +40,7 @@ public class PointController {
 
     @Operation(
             summary = "Создание обращение",
-            description = "Получение данных для создание заявки\n" +
-                    "Отдает создали или нет"
+            description = "Получение данных для создание заявки. Ждет на вход координаты и описание проблемы и опционально файл"
 
     )
     @PostMapping(value = EndPoint.creatPoint)
@@ -66,7 +65,11 @@ public class PointController {
         return new PointResponse(pointFromBD.getId(), status.toString(), pointFromBD.getPointCoordinates(), pointFromBD.getDescription(), pointFromBD.getCreatedAt(), pointFromBD.getUrlImage());
 
     }
+    @Operation(
+            summary = "Запрос на получение всех обращений",
+            description = "На вход ждет координаты пользователя, далее опционально лимит сколько всего обращений и офсет с какого обращения"
 
+    )
     @GetMapping(value = EndPoint.all)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public AllPointResponse allPointResponse(@Parameter(schema = @Schema(implementation = AllPointResponse.class))
@@ -76,7 +79,11 @@ public class PointController {
 
         return pointService.getAllPointForResponse(coordinates, limit, offset);
     }
+    @Operation(
+            summary = "Запрос на получение фото обращения",
+            description = "На вход ждет имя файла"
 
+    )
     @GetMapping(value = EndPoint.image,
             produces = MediaType.IMAGE_JPEG_VALUE)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")

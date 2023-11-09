@@ -12,9 +12,12 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Список всех обращений") //TODO ограничение .. в радиусе таком то от переданных координат
+@Schema(description = "Ответ API включает в себя Список всех обращений, лимит и офсет") //TODO ограничение .. в радиусе таком то от переданных координат
 public class AllPointResponse {
+    @Schema(description = "Список всех обращений.")
     private List<PointResponse> points;
+    @Schema(description = "Сколько всего обращений надо.")
     private Integer limit;
+    @Schema(description = "С какого обращения считать.")
     private Integer offset;
 }
