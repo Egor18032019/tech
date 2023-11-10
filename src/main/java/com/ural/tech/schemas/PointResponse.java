@@ -13,7 +13,7 @@ import java.time.Instant;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Ответ API включает себя статус обращения,координаты,описание проблемы")
+@Schema(description = "Ответ API включает в себя статус обращения,координаты,описание проблемы, дата создания обращения и имя файла")
 public class PointResponse {
     @Schema(description = "id из бд")
     Long id;
@@ -26,6 +26,6 @@ public class PointResponse {
     String description; // "яма на дороге"
     @Schema(description = "Время создание обращение")
     Instant dateComplete; //
-    @Schema(description = "путь к файлу сохраненому на сервере")
+    @Schema(description = "имя файла сохраненного на сервере")
     String pathToImage; //
 }

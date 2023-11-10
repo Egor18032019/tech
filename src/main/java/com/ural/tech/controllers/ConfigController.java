@@ -24,8 +24,8 @@ public class ConfigController {
     }
 
     @Operation(
-            summary = "Получение конфига для фронта",
-            description = "Получение данных для  фронта"
+            summary = "Получение версии",
+            description = "Выдает версию "
     )
     @GetMapping(value = EndPoint.config)
     public ConfigResponse getConfigFront() {
