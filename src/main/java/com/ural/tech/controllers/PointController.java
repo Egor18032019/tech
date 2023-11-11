@@ -29,7 +29,6 @@ import java.util.Optional;
 @RequestMapping(EndPoint.api)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PointController {
-
     PointService pointService;
     FileStorageService fileStorageService;
 
@@ -41,7 +40,6 @@ public class PointController {
     @Operation(
             summary = "Создание обращение",
             description = "Получение данных для создание заявки. Ждет на вход координаты и описание проблемы и опционально файл"
-
     )
     @PostMapping(value = EndPoint.creatPoint)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")

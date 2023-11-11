@@ -40,10 +40,10 @@ const BranchesMap = () => {
 
         console.log("handleFindAllBranch")
         if (setPoints) {
-            for (let i = 0; i < data.points.length; i++) {
-                data.points[i].coordinates = data.points[i].coordinates.slice(0, data.points[i].coordinates.length - 1).split(",").map(Number)
-                console.log(data.points[i].coordinates)
-            }
+            // for (let i = 0; i < data.points.length; i++) {
+            //     data.points[i].coordinates = data.points[i].coordinates.slice(0, data.points[i].coordinates.length - 1).split(",").map(Number)
+            //     console.log(data.points[i].coordinates)
+            // }
             setPoints(data.points)
         }
         if (setOriginalPoints) {
