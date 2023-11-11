@@ -60,9 +60,10 @@ public class PointController {
             pointFromBD = pointService.save(status, request);
         }
 
-        return new PointResponse(pointFromBD.getId(), status.toString(), pointFromBD.getPointCoordinates(), pointFromBD.getDescription(), pointFromBD.getCreatedAt(), pointFromBD.getUrlImage());
+        return new PointResponse(pointFromBD.getId(), status.toString(), pointFromBD.getPointCoordinates().split(","), pointFromBD.getDescription(), pointFromBD.getCreatedAt(), pointFromBD.getUrlImage());
 
     }
+
     @Operation(
             summary = "Запрос на получение всех обращений",
             description = "На вход ждет координаты пользователя, далее опционально лимит сколько всего обращений и офсет с какого обращения"
@@ -77,6 +78,7 @@ public class PointController {
 
         return pointService.getAllPointForResponse(coordinates, limit, offset);
     }
+
     @Operation(
             summary = "Запрос на получение фото обращения",
             description = "На вход ждет имя файла"
@@ -94,4 +96,15 @@ public class PointController {
         }
     }
 
+
+    @Operation(
+            summary = "Запрос на удаление или изменение одной точки",
+            description = "На вход ждет имя файла"
+
+    )
+    @PostMapping(value = EndPoint.update)
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
+    public PointResponse getImageForFront(@RequestBody() Points point) {
+        return new PointResponse();
+    }
 }

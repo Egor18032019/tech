@@ -22,7 +22,7 @@ public class Points {
     @Column()
     String status;
     @Column()
-    String[] pointCoordinates;
+    String pointCoordinates;
     @Column()
     String description;
     @Column()
@@ -36,13 +36,13 @@ public class Points {
     public Points() {
     }
 
-    public Points(String status, String[] pointCoordinates, String description) {
+    public Points(String status, String pointCoordinates, String description) {
         this.status = status;
         this.pointCoordinates = pointCoordinates;
         this.description = description;
     }
 
-    public Points(String status, String[] pointCoordinates, String description, String urlImage) {
+    public Points(String status, String pointCoordinates, String description, String urlImage) {
         this.status = status;
         this.pointCoordinates = pointCoordinates;
         this.description = description;

@@ -8,4 +8,5 @@ public class EndPoint {
     public static final String image = "/image";
 
     public static final String api = "/api";
+    public static final String update = "/update";
 }
