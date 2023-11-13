@@ -23,8 +23,8 @@ public class PointResponse {
     String[] coordinates; //point: [56.800584, 60.675637]}
     @Schema(description = "Описание проблемы")
     String description; // "яма на дороге"
-    @Schema(description = "Время создание обращение")
-    Instant dateComplete; //
+    @Schema(description = "Время создание/изменения обращение")
+    Instant createdAt; //
     @Schema(description = "имя файла сохраненного на сервере")
     String pathToImage; //
 }

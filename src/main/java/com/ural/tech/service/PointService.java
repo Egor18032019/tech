@@ -86,4 +86,16 @@ public class PointService {
 
         return pointsRepository.save(point);
     }
+
+
+    public Points updatePoint(Points point) {
+
+        pointsRepository.save(point);
+        return point;
+    }
+
+    public void delete(String idPoint) {
+        Long id = Long.valueOf(idPoint);
+        pointsRepository.deleteById(id);
+    }
 }

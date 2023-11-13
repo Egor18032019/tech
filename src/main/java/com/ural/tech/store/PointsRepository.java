@@ -6,7 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface PointsRepository extends JpaRepository<Points, Long> {
-
     List<Points> findAll();
 
 }

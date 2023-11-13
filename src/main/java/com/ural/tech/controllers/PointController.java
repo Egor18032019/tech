@@ -104,7 +104,17 @@ public class PointController {
     )
     @PostMapping(value = EndPoint.update)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public PointResponse getImageForFront(@RequestBody() Points point) {
+    //TODO отдельная схема на запрос
+    public PointResponse updatePoint(@RequestBody() Points point) {
+        Points pointForBD = pointService.updatePoint(point);
+
+        return new PointResponse(pointForBD.getId(), pointForBD.getStatus(), pointForBD.getPointCoordinates().split(","), pointForBD.getDescription(), pointForBD.getCreatedAt(), pointForBD.getUrlImage());
+    }
+
+    @DeleteMapping(value = EndPoint.delete)
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
+    public PointResponse deletePoint(@RequestParam String id) {
+        pointService.delete(id);
         return new PointResponse();
     }
 }

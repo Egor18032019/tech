@@ -69,11 +69,8 @@ const BranchesMap = () => {
                         // включаем модули, отвечающие за всплывающие окна над геообъектами
 
                     }}
-                    width="400px"
-                    height="400px"
-                    onDrag={() => {
-                        console.log("onDrag");
-                    }}
+                    width="500px"
+                    height="500px"
                     onLoad={() => {
                         console.log("onLoad");
                         handleFindAllBranch()
@@ -88,7 +85,13 @@ const BranchesMap = () => {
                             draggable: true,
                             hintContent: "Вы здесь"
                         }}
-                        options={{preset: "islands#blueCircleIcon"}}
+                        options={{
+                            iconImageSize: [30, 30],
+                            draggable: true,
+                            preset: "islands#greenIcon",
+                            hideIconOnBalloonOpen: false,
+                            openEmptyHint: true
+                        }}
                         onClick={() => {
                             console.log(userLocation.reverse());
                         }}
