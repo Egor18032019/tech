@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import {YMaps, Map, Placemark} from "@pbe/react-yandex-maps";
 
 import {useContextMap} from "./PointReducer";
+import {url} from "./Const";
 
 const BranchesMap = () => {
-    const {points, setPoint, setPoints, setOriginalPoints, setDataLoaded} = useContextMap();
-
+    const {setCoordinates, points, setPoint, setPoints, setOriginalPoints, setDataLoaded} = useContextMap();
+    const ref = useRef();
 
     type PointsData = {
         id: number;
@@ -15,16 +16,15 @@ const BranchesMap = () => {
         urlImage: string;
         createdAt: string;// date
     };
-    // const url = "http://localhost:8080/";
-    const url = "";
 
-    const userLocation = [60.497874, 56.926761];
+
+    const userLocation = [56.926761, 60.497874];
     type UserLocationData = number[];
-    const [user, setUser] = useState<UserLocationData | null>(userLocation);
+    const [userCoords, setUserCoords] = useState<UserLocationData>(userLocation);
 
 
     const handleFindAllBranch = async () => {
-        const response = await fetch(url + "api/all?coordinates=60.497874,56.926760", {
+        const response = await fetch(url + "/api/all?coordinates=60.497874,56.926760", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -52,7 +52,11 @@ const BranchesMap = () => {
     };
 //todo запрос на получение гео позиции
     const handleFindUser = async () => {
-        setUser(userLocation);
+        setUserCoords(userCoords);
+        console.log("setPoint " + userCoords)
+        if (setCoordinates) {
+            setCoordinates(userCoords)
+        }
     };
 
     return (
@@ -65,7 +69,7 @@ const BranchesMap = () => {
                 <Map
                     modules={["templateLayoutFactory", "layout.ImageWithContent"]}
                     state={{
-                        center: userLocation, zoom: 10,
+                        center: userCoords, zoom: 10,
                         // включаем модули, отвечающие за всплывающие окна над геообъектами
 
                     }}
@@ -74,13 +78,15 @@ const BranchesMap = () => {
                     onLoad={() => {
                         console.log("onLoad");
                         handleFindAllBranch()
+                        handleFindUser()
                     }}
                 >
                     {/* Отображение местоположения пользователя */}
                     <Placemark
+                        instanceRef={ref}
                         key={"me"}
                         draggable={true}
-                        geometry={userLocation.reverse()} // перевернул координаты !
+                        geometry={userCoords} // перевернул координаты !
                         properties={{
                             draggable: true,
                             hintContent: "Вы здесь"
@@ -93,11 +99,11 @@ const BranchesMap = () => {
                             openEmptyHint: true
                         }}
                         onClick={() => {
-                            console.log(userLocation.reverse());
+                            console.log(userCoords.reverse());
                         }}
                         onMouseEnter={() => {
 
-                            console.log(userLocation);
+                            console.log(userCoords);
                         }}
                         onMouseLeave={() => {
                             console.log(Placemark);
@@ -105,10 +111,15 @@ const BranchesMap = () => {
                         onDrag={() => {
                             console.log("onDrag");
                         }}
-                        onDragLeave={() => {
-                            console.log("onDragLeave");
+                        onDragEnd={() => {
+                            // @ts-ignore
+                            const coords = ref.current.geometry._coordinates;
+                            if (setCoordinates) {
+                                setCoordinates(coords)
+                            }
+                            console.log("onDragEnd " + coords);
+                            setUserCoords(coords)
                         }}
-
                     />
 
                     {/* Отображение отделений */}
