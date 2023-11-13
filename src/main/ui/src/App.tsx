@@ -11,8 +11,8 @@ function App() {
             <TownProvider>
                 <BranchesMap/>
                 <Card/>
+                <Form/>
             </TownProvider>
-            <Form/>
         </div>
     );
 }

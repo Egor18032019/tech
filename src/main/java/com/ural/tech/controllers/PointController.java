@@ -29,7 +29,6 @@ import java.util.Optional;
 @RequestMapping(EndPoint.api)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PointController {
-
     PointService pointService;
     FileStorageService fileStorageService;
 
@@ -41,7 +40,6 @@ public class PointController {
     @Operation(
             summary = "Создание обращение",
             description = "Получение данных для создание заявки. Ждет на вход координаты и описание проблемы и опционально файл"
-
     )
     @PostMapping(value = EndPoint.creatPoint)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
@@ -62,9 +60,10 @@ public class PointController {
             pointFromBD = pointService.save(status, request);
         }
 
-        return new PointResponse(pointFromBD.getId(), status.toString(), pointFromBD.getPointCoordinates(), pointFromBD.getDescription(), pointFromBD.getCreatedAt(), pointFromBD.getUrlImage());
+        return new PointResponse(pointFromBD.getId(), status.toString(), pointFromBD.getPointCoordinates().split(","), pointFromBD.getDescription(), pointFromBD.getCreatedAt(), pointFromBD.getUrlImage());
 
     }
+
     @Operation(
             summary = "Запрос на получение всех обращений",
             description = "На вход ждет координаты пользователя, далее опционально лимит сколько всего обращений и офсет с какого обращения"
@@ -79,6 +78,7 @@ public class PointController {
 
         return pointService.getAllPointForResponse(coordinates, limit, offset);
     }
+
     @Operation(
             summary = "Запрос на получение фото обращения",
             description = "На вход ждет имя файла"
@@ -96,4 +96,25 @@ public class PointController {
         }
     }
 
+
+    @Operation(
+            summary = "Запрос на удаление или изменение одной точки",
+            description = "На вход ждет имя файла"
+
+    )
+    @PostMapping(value = EndPoint.update)
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
+    //TODO отдельная схема на запрос
+    public PointResponse updatePoint(@RequestBody() Points point) {
+        Points pointForBD = pointService.updatePoint(point);
+
+        return new PointResponse(pointForBD.getId(), pointForBD.getStatus(), pointForBD.getPointCoordinates().split(","), pointForBD.getDescription(), pointForBD.getCreatedAt(), pointForBD.getUrlImage());
+    }
+
+    @DeleteMapping(value = EndPoint.delete)
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
+    public PointResponse deletePoint(@RequestParam String id) {
+        pointService.delete(id);
+        return new PointResponse();
+    }
 }

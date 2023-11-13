@@ -19,13 +19,12 @@ public class PointResponse {
     Long id;
     @Schema(description = "статус обращения")
     String status;
-
     @Schema(description = "координаты в формате 60.497874,56.926760 ")
-    String coordinates; //point: [56.800584, 60.675637]}
+    String[] coordinates; //point: [56.800584, 60.675637]}
     @Schema(description = "Описание проблемы")
     String description; // "яма на дороге"
-    @Schema(description = "Время создание обращение")
-    Instant dateComplete; //
+    @Schema(description = "Время создание/изменения обращение")
+    Instant createdAt; //
     @Schema(description = "имя файла сохраненного на сервере")
     String pathToImage; //
 }

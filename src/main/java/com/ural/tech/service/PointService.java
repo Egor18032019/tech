@@ -61,8 +61,8 @@ public class PointService {
         //TODO может из БД лимит и офсет тащить
         for (int i = realOffset; i < realLimit; i++) {
             Points point = pointEntities.get(i);
-
-            PointResponse pointResponse = new PointResponse(point.getId(),point.getStatus(), point.getPointCoordinates(), point.getDescription(),point.getCreatedAt(),point.getUrlImage());
+            String[] coord = point.getPointCoordinates().split(",");
+            PointResponse pointResponse = new PointResponse(point.getId(), point.getStatus(), coord, point.getDescription(), point.getCreatedAt(), point.getUrlImage());
             pointResponses.add(pointResponse);
         }
 
@@ -74,6 +74,7 @@ public class PointService {
 
     public Points save(Status status, PointRequest request) {
         //todo ограчение на сохренния на координаты или на ?
+
         Points point = new Points(status.getStatus(), request.getPointCoordinates(), request.getDescription());
 
         return pointsRepository.save(point);
@@ -81,8 +82,20 @@ public class PointService {
 
     public Points save(Status status, PointRequest request, Path urlImage) {
         //todo ограчение на сохренния на координаты или на ?
-        Points point = new Points(status.getStatus(), request.getPointCoordinates(), request.getDescription(),urlImage.toString());
+        Points point = new Points(status.getStatus(), request.getPointCoordinates(), request.getDescription(), urlImage.toString());
 
         return pointsRepository.save(point);
+    }
+
+
+    public Points updatePoint(Points point) {
+
+        pointsRepository.save(point);
+        return point;
+    }
+
+    public void delete(String idPoint) {
+        Long id = Long.valueOf(idPoint);
+        pointsRepository.deleteById(id);
     }
 }
