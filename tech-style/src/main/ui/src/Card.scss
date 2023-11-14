@@ -1,0 +1,35 @@
+$border-color: #ddd;
+$input-border: #ccc;
+$primary-color: #007bff;
+$hover-color: #0056b3;
+$base-spacing: 10px;
+
+.card-container {
+  position: absolute;
+  margin-left: 60%;
+  margin-top: -450px;
+  min-width: 342px;
+  font-size: small;
+  
+}
+
+.card {
+  
+  // margin: 20px;
+  // margin-top: 0px;
+  // padding: 5px;
+  margin: $base-spacing auto;
+  padding: $base-spacing;
+  border: 2px solid $border-color;
+  border-radius: 6px;
+}
+
+@media (max-width: 720px){
+  .card-container {
+    position: relative;
+    margin: 20px;
+    margin-top: 0px;
+  }
+}
+
+
