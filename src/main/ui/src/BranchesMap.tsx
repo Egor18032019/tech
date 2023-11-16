@@ -60,21 +60,21 @@ const BranchesMap = () => {
     };
 
     return (
-        <div>
+        <div className="Map-container">
             <YMaps
                 query={{
                     apikey: `03a21dbf-0bd0-4788-901d-53dabb409285`
                 }}>
 
-                <Map
+                <Map 
                     modules={["templateLayoutFactory", "layout.ImageWithContent"]}
                     state={{
                         center: userCoords, zoom: 10,
                         // включаем модули, отвечающие за всплывающие окна над геообъектами
 
                     }}
-                    width="500px"
-                    height="500px"
+                    width="100%"
+                    height="100%"
                     onLoad={() => {
                         console.log("onLoad");
                         handleFindAllBranch()
@@ -94,7 +94,7 @@ const BranchesMap = () => {
                         options={{
                             iconImageSize: [30, 30],
                             draggable: true,
-                            preset: "islands#greenIcon",
+                            preset: "islands#redAttentionIcon",
                             hideIconOnBalloonOpen: false,
                             openEmptyHint: true
                         }}
@@ -148,10 +148,10 @@ const BranchesMap = () => {
 
 
                 </Map>
-                <button onClick={handleFindUser}>
+                <button className = 'btn' onClick={handleFindUser}>
                     Найти себя
                 </button>
-                <button onClick={handleFindAllBranch}>
+                <button className = 'btn' onClick={handleFindAllBranch}>
                     Найти все точки
                 </button>
 

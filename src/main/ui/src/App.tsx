@@ -5,16 +5,21 @@ import WhitMapCardForm from './WhitMapCardForm';
 import './App.scss';
 import {TownProvider} from "./PointReducer";
 import Card from "./Card";
-import Admin from "./Admin";
+import Form from "./Form";
+import Nav from "./component/Nav/Nav";
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<WhitMapCardForm/>}/>
-                <Route path="/admin" element={<Admin/>}/>
-            </Routes>
-        </BrowserRouter>
+      <>
+       <Nav/>
+            <div>
+                <TownProvider>
+                    <BranchesMap/>
+                    <Card/>
+                    <Form/>
+                </TownProvider>
+            </div>
+        </>
     );
 }
 
