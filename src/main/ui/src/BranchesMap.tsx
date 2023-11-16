@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useContext, createContext} from "react";
 import {YMaps, Map, Placemark} from "@pbe/react-yandex-maps";
 
 import {useContextMap} from "./PointReducer";
@@ -7,7 +7,7 @@ import {url} from "./Const";
 const BranchesMap = () => {
     const {setCoordinates, points, setPoint, setPoints, setOriginalPoints, setDataLoaded} = useContextMap();
     const ref = useRef();
-
+    const UserContext = createContext(points)
     type PointsData = {
         id: number;
         status: string;
@@ -122,7 +122,7 @@ const BranchesMap = () => {
                         }}
                     />
 
-                    {/* Отображение отделений */}
+                    {/* Отображение точек */}
                     {points && points.map((i) => (
                         <Placemark
                             key={i.id}

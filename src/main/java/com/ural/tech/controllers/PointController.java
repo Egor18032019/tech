@@ -98,9 +98,8 @@ public class PointController {
 
 
     @Operation(
-            summary = "Запрос на удаление или изменение одной точки",
+            summary = "Запрос на изменение одной точки",
             description = "На вход ждет имя файла"
-
     )
     @PostMapping(value = EndPoint.update)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
@@ -111,6 +110,10 @@ public class PointController {
         return new PointResponse(pointForBD.getId(), pointForBD.getStatus(), pointForBD.getPointCoordinates().split(","), pointForBD.getDescription(), pointForBD.getCreatedAt(), pointForBD.getUrlImage());
     }
 
+    @Operation(
+            summary = "Запрос на удаление одной точки",
+            description = "На вход ждет id точки"
+    )
     @DeleteMapping(value = EndPoint.delete)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public PointResponse deletePoint(@RequestParam String id) {
