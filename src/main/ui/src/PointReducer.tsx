@@ -22,14 +22,14 @@ type PointsData = {
     urlImage: string;
     createdAt: string;// date
 };
-const pointForFront = {
-    id: 1,
-    status: "great",
-    description: "Описане проблемы. все плохо спасите",
-    coordinates:  [60.444, 56.93333],
-    urlImage: "9rhqikxtsp.png",
-    createdAt: "22.09.2023",// date
-}
+// const pointForFront = {
+//     id: 1,
+//     status: "great",
+//     description: "Описане проблемы. все плохо спасите",
+//     coordinates:  [60.444, 56.93333],
+//     urlImage: "9rhqikxtsp.png",
+//     createdAt: "22.09.2023",// date
+// }
 interface stateTownProvider {
     page: string,
     point: PointsData | null,
@@ -62,6 +62,8 @@ const reducer = (state: stateTownProvider, action: reduceAction) => {
                 points: action.payload,
             });
         case ActionType.CHOOSE_POINT:
+            console.log(action.payload)
+            console.log(action.type)
             return Object.assign({}, state, {
                 point: action.payload,
             });
@@ -75,13 +77,13 @@ const reducer = (state: stateTownProvider, action: reduceAction) => {
 };
 
 // @ts-ignore
-const TownProvider = ({children}) => {
+const PointProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer,
         { // первоначальный стайт
             page: "first",
             coordinates: [],
             isDataLoaded: false,
-            point: pointForFront,
+            point: null,
             points: [],
             originalPoints: [],
         });
@@ -121,6 +123,6 @@ const useContextMap = () => {
 };
 
 export {
-    TownProvider,
+    PointProvider,
     useContextMap
 };

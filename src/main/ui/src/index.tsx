@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
-import {TownProvider} from "./PointReducer";
+import {PointProvider} from "./PointReducer";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <TownProvider>
+        <PointProvider>
             <App/>
-        </TownProvider>
+        </PointProvider>
     </React.StrictMode>
 );

@@ -7,7 +7,6 @@ import {url} from "./Const";
 const BranchesMap = () => {
     const {setCoordinates, points, setPoint, setPoints, setOriginalPoints, setDataLoaded} = useContextMap();
     const ref = useRef();
-    const UserContext = createContext(points)
     type PointsData = {
         id: number;
         status: string;
@@ -55,8 +54,8 @@ const BranchesMap = () => {
 //todo запрос на получение гео позиции
     const handleFindUser = async () => {
         setUserCoords(userCoords);
-        console.log("setPoint " + userCoords)
         if (setCoordinates) {
+        console.log("setPoint " + userCoords)
             setCoordinates(userCoords)
         }
     };

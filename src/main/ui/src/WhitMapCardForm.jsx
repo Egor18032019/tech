@@ -1,5 +1,5 @@
 import {BrowserRouter, Route} from "react-router-dom";
-import {TownProvider} from "./PointReducer";
+import {PointProvider} from "./PointReducer";
 import BranchesMap from "./BranchesMap";
 import Card from "./Card";
 import Form from "./Form";
