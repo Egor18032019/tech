@@ -9,4 +9,5 @@ public class EndPoint {
 
     public static final String api = "/api";
     public static final String update = "/update";
+    public static final String delete = "/delete";
 }

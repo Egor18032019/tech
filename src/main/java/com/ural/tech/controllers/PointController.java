@@ -99,12 +99,22 @@ public class PointController {
 
     @Operation(
             summary = "Запрос на удаление или изменение одной точки",
-            description = "На вход ждет имя файла"
-
+            description = "На вход ждет Points"
     )
     @PostMapping(value = EndPoint.update)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public PointResponse getImageForFront(@RequestBody() Points point) {
+    public PointResponse updatePoints(@RequestBody() Points point) {
+        pointService.update(point;
+        return new PointResponse();
+    }
+    @Operation(
+            summary = "Запрос на удаление одной точки",
+            description = "На вход ждет Points"
+    )
+    @DeleteMapping(value = EndPoint.delete)
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
+    public PointResponse deletePoints(@RequestParam  String id) {
+        pointService.delete(id);
         return new PointResponse();
     }
 }
