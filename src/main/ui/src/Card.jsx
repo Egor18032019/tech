@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './Card.scss';
 import {useContextMap} from "./PointReducer";
+import {url} from "./Const";
 
 const Card = () => {
-    // const url = "http://localhost:8080/";
-    const url = "";
+
     const [image, setImage] = useState(null);
     const {point} = useContextMap();
     useEffect(() => {
@@ -14,7 +14,7 @@ const Card = () => {
         }
     }, [point]);
     const handleLoadImage = async () => {
-        const response = await fetch(url + "api/image?name=" + point.pathToImage, {
+        const response = await fetch(url + "/api/image?name=" + point.pathToImage, {
             method: "GET",
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -24,11 +24,7 @@ const Card = () => {
 
         });
 //todo убрать лишнее limit and ofset
-
-
         const data = await response;
-
-
         setImage(data.url)
     };
 

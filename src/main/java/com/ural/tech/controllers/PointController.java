@@ -98,22 +98,23 @@ public class PointController {
 
 
     @Operation(
-            summary = "Запрос на удаление или изменение одной точки",
+            summary = "Запрос на  изменение одной точки",
             description = "На вход ждет Points"
     )
     @PostMapping(value = EndPoint.update)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public PointResponse updatePoints(@RequestBody() Points point) {
-        pointService.update(point;
+        pointService.updatePoint(point);
         return new PointResponse();
     }
+
     @Operation(
             summary = "Запрос на удаление одной точки",
             description = "На вход ждет Points"
     )
     @DeleteMapping(value = EndPoint.delete)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public PointResponse deletePoints(@RequestParam  String id) {
+    public PointResponse deletePoint(@RequestParam String id) {
         pointService.delete(id);
         return new PointResponse();
     }

@@ -2,16 +2,18 @@ import * as React from 'react';
 import {useContext, useReducer} from 'react';
 
 type ContextProps = {
+    page: string,
     point: {} | null,
+    coordinates: any, //todo null ??
     points: PointsData[],
-    originalPoints: [],
+    originalPoints: PointsData[],
+    setCoordinates: (coordinates: any) => void,
     setPoint: (point: {}) => void,
     setPoints: (points: []) => void,
     setOriginalPoints: (points: []) => void,
     setDataLoaded: (isDataLoaded: boolean) => void,
 
 };
-//todo добавить imageUrl
 type PointsData = {
     id: number;
     status: string;
@@ -23,10 +25,11 @@ type PointsData = {
 
 interface stateTownProvider {
     page: string,
-    isDataLoaded: boolean,
     point: PointsData | null,
+    coordinates: [],
     points: PointsData[] | [],
-    originalPoints: [],
+    originalPoints: PointsData[] | [],
+    isDataLoaded: boolean,
 }
 
 interface reduceAction {
@@ -40,12 +43,12 @@ enum ActionType {
     ADD_POINTS = "ADD_POINTS",
     CHOOSE_POINT = "CHOOSE_POINT",
     FILTER_POINT = "FILTER_POINT",
+    CHANGE_COORDINATES = "CHANGE_COORDINATES",
     GET_SERVER_STATUS = "GET_SERVER_STATUS"
 };
 
 
 const reducer = (state: stateTownProvider, action: reduceAction) => {
-    console.log("state" + state)
     switch (action.type) {
         case ActionType.ADD_POINTS:
             return Object.assign({}, state, {
@@ -54,6 +57,10 @@ const reducer = (state: stateTownProvider, action: reduceAction) => {
         case ActionType.CHOOSE_POINT:
             return Object.assign({}, state, {
                 point: action.payload,
+            });
+        case ActionType.CHANGE_COORDINATES:
+            return Object.assign({}, state, {
+                coordinates: action.payload,
             });
         default:
             return state;
@@ -65,6 +72,7 @@ const TownProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer,
         { // первоначальный стайт
             page: "first",
+            coordinates: [],
             isDataLoaded: false,
             point: null,
             points: [],
@@ -74,23 +82,25 @@ const TownProvider = ({children}) => {
 
     const setPoint = (payload: {}) => dispatch({type: ActionType.CHOOSE_POINT, payload});
     const setPoints = (payload: PointsData[]) => {
-
-
         dispatch({type: ActionType.ADD_POINTS, payload});
     };
     const setOriginalPoints = (payload: PointsData[]) => dispatch({type: ActionType.FILTER_POINT, payload});
 
     const setDataLoaded = (payload: boolean) => dispatch({type: ActionType.GET_SERVER_STATUS, payload});
+    const setCoordinates = (payload: any) => dispatch({type: ActionType.CHANGE_COORDINATES, payload});
 
     return (
         <TownContext.Provider
             value={{
+                page: state.page,
+                coordinates: state.coordinates,
                 point: state.point,
                 points: state.points,
                 originalPoints: state.originalPoints,
                 setPoint,
                 setPoints,
                 setDataLoaded,
+                setCoordinates,
                 setOriginalPoints
             }}>
             {children}

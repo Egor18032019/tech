@@ -87,12 +87,17 @@ public class PointService {
         return pointsRepository.save(point);
     }
 
-    public void delete(String id) {
-        Long idForBD = Long.valueOf(id);
-        pointsRepository.deleteById(idForBD);
+
+
+    public Points updatePoint(Points point) {
+        //todo переделать
+        pointsRepository.save(point);
+        return point;
     }
 
-    public void update(Points point) {
+    public void delete(String idPoint) {
+        Long id = Long.valueOf(idPoint);
+        pointsRepository.deleteById(id);
 
     }
 }
