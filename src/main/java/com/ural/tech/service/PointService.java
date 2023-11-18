@@ -88,8 +88,9 @@ public class PointService {
     }
 
 
-    public Points updatePoint(Points point) {
 
+    public Points updatePoint(Points point) {
+        //todo переделать
         pointsRepository.save(point);
         return point;
     }
@@ -97,5 +98,6 @@ public class PointService {
     public void delete(String idPoint) {
         Long id = Long.valueOf(idPoint);
         pointsRepository.deleteById(id);
+
     }
 }

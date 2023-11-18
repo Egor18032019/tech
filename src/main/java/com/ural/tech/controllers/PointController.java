@@ -98,19 +98,20 @@ public class PointController {
 
 
     @Operation(
-            summary = "Запрос на удаление или изменение одной точки",
-            description = "На вход ждет имя файла"
-
+            summary="Запрос на  изменение одной точки",
+            description = "На вход ждет Points"
     )
     @PostMapping(value = EndPoint.update)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    //TODO отдельная схема на запрос
-    public PointResponse updatePoint(@RequestBody() Points point) {
-        Points pointForBD = pointService.updatePoint(point);
-
-        return new PointResponse(pointForBD.getId(), pointForBD.getStatus(), pointForBD.getPointCoordinates().split(","), pointForBD.getDescription(), pointForBD.getCreatedAt(), pointForBD.getUrlImage());
+    public PointResponse updatePoints(@RequestBody() Points point) {
+        pointService.updatePoint(point);
+        return new PointResponse();
     }
 
+    @Operation(
+            summary="Запрос на удаление одной точки",
+            description = "На вход ждет id точки"
+    )
     @DeleteMapping(value = EndPoint.delete)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public PointResponse deletePoint(@RequestParam String id) {

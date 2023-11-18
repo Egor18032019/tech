@@ -48,4 +48,16 @@ public class Points {
         this.description = description;
         this.urlImage = urlImage;
     }
+
+    @Override
+    public String toString() {
+        return "Points{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", pointCoordinates='" + pointCoordinates + '\'' +
+                ", description='" + description + '\'' +
+                ", urlImage='" + urlImage + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }
