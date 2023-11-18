@@ -83,7 +83,7 @@ const Form = () => {
         </div>
       </form>
       <div className="form__photo" >
-        <img className="img_upload" width="320px" src={`${image}`} />
+        <img className="img_upload" width="300px" src={`${image}`} />
       </div>
       {notification.message && (
         <div className={`notification ${notification.type}`}>
