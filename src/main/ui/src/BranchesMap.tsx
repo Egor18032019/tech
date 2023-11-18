@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useContext, createContext} from "react";
 import {YMaps, Map, Placemark} from "@pbe/react-yandex-maps";
 
 import {useContextMap} from "./PointReducer";
@@ -7,7 +7,6 @@ import {url} from "./Const";
 const BranchesMap = () => {
     const {setCoordinates, points, setPoint, setPoints, setOriginalPoints, setDataLoaded} = useContextMap();
     const ref = useRef();
-
     type PointsData = {
         id: number;
         status: string;
@@ -24,6 +23,7 @@ const BranchesMap = () => {
 
 
     const handleFindAllBranch = async () => {
+
         const response = await fetch(url + "/api/all?coordinates=60.497874,56.926760", {
             method: "GET",
             headers: {
@@ -49,12 +49,13 @@ const BranchesMap = () => {
         if (setOriginalPoints) {
             setOriginalPoints(data.points)
         }
+
     };
 //todo запрос на получение гео позиции
     const handleFindUser = async () => {
         setUserCoords(userCoords);
-        console.log("setPoint " + userCoords)
         if (setCoordinates) {
+        console.log("setPoint " + userCoords)
             setCoordinates(userCoords)
         }
     };
@@ -66,7 +67,7 @@ const BranchesMap = () => {
                     apikey: `03a21dbf-0bd0-4788-901d-53dabb409285`
                 }}>
 
-                <Map 
+                <Map
                     modules={["templateLayoutFactory", "layout.ImageWithContent"]}
                     state={{
                         center: userCoords, zoom: 10,
@@ -122,7 +123,7 @@ const BranchesMap = () => {
                         }}
                     />
 
-                    {/* Отображение отделений */}
+                    {/* Отображение точек */}
                     {points && points.map((i) => (
                         <Placemark
                             key={i.id}

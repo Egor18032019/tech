@@ -98,7 +98,7 @@ public class PointController {
 
 
     @Operation(
-            summary = "Запрос на  изменение одной точки",
+            summary="Запрос на  изменение одной точки",
             description = "На вход ждет Points"
     )
     @PostMapping(value = EndPoint.update)
@@ -109,8 +109,8 @@ public class PointController {
     }
 
     @Operation(
-            summary = "Запрос на удаление одной точки",
-            description = "На вход ждет Points"
+            summary="Запрос на удаление одной точки",
+            description = "На вход ждет id точки"
     )
     @DeleteMapping(value = EndPoint.delete)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")

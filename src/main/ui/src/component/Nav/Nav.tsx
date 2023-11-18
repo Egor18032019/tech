@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Nav.module.scss';
 import * as data from './links.json';
+import {useContextMap} from "../../PointReducer";
 const linksString = JSON.stringify(data);
 const links = JSON.parse(linksString).links;
 
@@ -14,7 +15,9 @@ const Links: React.FC<{ links: Link[] }> = ({ links }) => {
         <div className={styles['links-container']}>
             {links.map((link: Link) => {
                 return (
-                    <div key={link.href} className={styles['link']}>
+                    <div key={link.href} className={styles['link']}   onClick={() => {
+                        console.log("userCoords.reverse()");
+                    }}>
                         <a href={link.href}>
                             {link.label}
                         </a>
@@ -26,6 +29,8 @@ const Links: React.FC<{ links: Link[] }> = ({ links }) => {
 };
 
 const Nav: React.FC<{}> = () => {
+    const {setCoordinates, points, setPoint, setPoints, setOriginalPoints, setDataLoaded} = useContextMap();
+
     return (
         <nav className={styles.navbar}>
             <div className={styles['logo-container']}>
