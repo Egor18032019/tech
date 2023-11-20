@@ -25,11 +25,11 @@ const pointForFront = {
     status: "great",
     description: "Описане проблемы. все плохо спасите",
     coordinates:  [60.444, 56.93333],
-    urlImage: "9rhqikxtsp.png",
+    urlImage: "https://cdn-icons-png.flaticon.com/512/9547/9547589.png",
     createdAt: "22.09.2023",// date
 }
 interface stateTownProvider {
-    page: string,
+    page: string,   
     isDataLoaded: boolean,
     point: PointsData | null,
     points: PointsData[] | [],
