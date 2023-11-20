@@ -35,7 +35,7 @@ const Card = () => {
             {point && (
                 <div className={`card card-${point.id}`}>
                     <p> {point.description}</p>
-                    <img src={`${image}`}/>
+                    <img className={"img_card"} src={`${image}`}/>
                 </div>
             )}
         </div>

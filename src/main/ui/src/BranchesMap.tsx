@@ -55,7 +55,7 @@ const BranchesMap = () => {
     const handleFindUser = async () => {
         setUserCoords(userCoords);
         if (setCoordinates) {
-        console.log("setPoint " + userCoords)
+            console.log("setPoint " + userCoords)
             setCoordinates(userCoords)
         }
     };
@@ -149,16 +149,15 @@ const BranchesMap = () => {
 
 
                 </Map>
-                <button className = 'btn' onClick={handleFindUser}>
+                <button className="btn" onClick={handleFindUser}>
                     Найти себя
                 </button>
-                <button className = 'btn' onClick={handleFindAllBranch}>
+                <button className="btn" onClick={handleFindAllBranch}>
                     Найти все точки
                 </button>
-
             </YMaps>
 
-            <div> Всего поинтов {points ? points.length : 0} </div>
+            <div className="str"> Всего поинтов {points ? points.length : 0} </div>
         </div>
     );
 };
