@@ -4,10 +4,10 @@ import BranchesMap from "./BranchesMap";
 import Card from "./Card";
 import Form from "./Form";
 import React from "react";
-import App from "./App";
 
 
-function WhitMapCardForm() {
+function WhitMapCardForm( ) {
+
     return (
 
         <div>

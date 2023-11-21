@@ -6,14 +6,15 @@ $base-spacing: 10px;
 
 .card-container {
   position: absolute;
-  margin-left: 60%;
-  margin-top: -150px;
-  min-width: 342px;
+  margin-left: 70%;
+  margin-top: -490px;
+  min-width: 300px;
   font-size: small;
 }
 
 .card {
-  
+  box-sizing: content-box;
+  width: 200px;
   // margin: 20px;
   // margin-top: 0px;
   // padding: 5px;
@@ -27,6 +28,11 @@ $base-spacing: 10px;
   
 }
 
+.img_card{
+  width: inherit;
+  // height: 150px;
+}
+
 @media (max-width: 720px){
   .card-container {
     max-width: 300px;
@@ -34,5 +40,3 @@ $base-spacing: 10px;
     margin: 20px;
   }
 }
-
-
