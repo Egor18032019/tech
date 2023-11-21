@@ -1,3 +1,4 @@
+
 import React, {useState} from "react";
 import "./Form.scss";
 import sendPost from "./ServiceCalls";
@@ -97,7 +98,9 @@ const Form = () => {
                 </div>
             )}
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Form;

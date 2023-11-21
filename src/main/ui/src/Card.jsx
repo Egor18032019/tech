@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import './Card.scss';
 import {useContextMap} from "./PointReducer";
-import {url} from "./Const";
+// import {url} from "./Const";
 
 const Card = () => {
 
-    const [image, setImage] = useState(null);
+   const [image, setImage] = useState(null);
     const {point} = useContextMap();
     useEffect(() => {
         if (point != null) {
@@ -28,7 +28,7 @@ const Card = () => {
         setImage(data.url)
     };
 
-
+ 
     return (
         <div className="card-container">
 
