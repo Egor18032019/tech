@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Nav.module.scss';
 import * as data from './links.json';
+import {NavLink} from "react-router-dom";
 const linksString = JSON.stringify(data);
 const links = JSON.parse(linksString).links;
 
@@ -15,9 +16,9 @@ const Links: React.FC<{ links: Link[] }> = ({ links }) => {
             {links.map((link: Link) => {
                 return (
                     <div key={link.href} className={styles['link']}>
-                        <a href={link.href}>
+                        <NavLink to={link.href} className="card-link">
                             {link.label}
-                        </a>
+                        </NavLink>
                     </div>
                 )
             })}
@@ -25,12 +26,14 @@ const Links: React.FC<{ links: Link[] }> = ({ links }) => {
     )
 };
 
+
 const Nav: React.FC<{}> = () => {
     return (
         <nav className={styles.navbar}>
             <div className={styles['logo-container']}>
                 <span>Logo</span>
             </div>
+
             <Links links={links} />
         </nav>
     )

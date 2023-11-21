@@ -82,6 +82,20 @@ public class PointController {
     @Operation(
             summary = "Запрос на получение фото обращения",
             description = "На вход ждет имя файла"
+    )
+    @GetMapping(value = {"{name}"})
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
+    public byte[] getImage(@PathVariable String name) {
+        Resource image = fileStorageService.load(name);
+        try {
+            return image.getContentAsByteArray();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Operation(
+            summary = "Запрос на получение фото обращения",
+            description = "На вход ждет имя файла"
 
     )
     @GetMapping(value = EndPoint.image,
@@ -112,9 +126,9 @@ public class PointController {
             summary="Запрос на удаление одной точки",
             description = "На вход ждет id точки"
     )
-    @DeleteMapping(value = EndPoint.delete)
+    @DeleteMapping(value = {"{id}"})
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public PointResponse deletePoint(@RequestParam String id) {
+    public PointResponse deletePoint(@PathVariable String id) {
         pointService.delete(id);
         return new PointResponse();
     }

@@ -7,6 +7,7 @@ type ContextProps = {
     coordinates: any, //todo null ??
     points: PointsData[],
     originalPoints: PointsData[],
+    setPage: (string: any) => void,
     setCoordinates: (coordinates: any) => void,
     setPoint: (point: {}) => void,
     setPoints: (points: []) => void,
@@ -48,6 +49,7 @@ const TownContext = React.createContext<Partial<ContextProps>>({}); //перед
 
 enum ActionType {
     ADD_POINTS = "ADD_POINTS",
+    CHANGE_PAGE = "CHANGE_PAGE",
     CHOOSE_POINT = "CHOOSE_POINT",
     FILTER_POINT = "FILTER_POINT",
     CHANGE_COORDINATES = "CHANGE_COORDINATES",
@@ -71,6 +73,10 @@ const reducer = (state: stateTownProvider, action: reduceAction) => {
             return Object.assign({}, state, {
                 coordinates: action.payload,
             });
+        case ActionType.CHANGE_PAGE:
+            return Object.assign({}, state, {
+                page: action.payload,
+            });
         default:
             return state;
     }
@@ -80,7 +86,7 @@ const reducer = (state: stateTownProvider, action: reduceAction) => {
 const PointProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer,
         { // первоначальный стайт
-            page: "first",
+            page: "home",
             coordinates: [],
             isDataLoaded: false,
             point: null,
@@ -97,6 +103,7 @@ const PointProvider = ({children}) => {
 
     const setDataLoaded = (payload: boolean) => dispatch({type: ActionType.GET_SERVER_STATUS, payload});
     const setCoordinates = (payload: any) => dispatch({type: ActionType.CHANGE_COORDINATES, payload});
+    const setPage = (payload: string) => dispatch({type: ActionType.CHANGE_PAGE, payload});
 
     return (
         <TownContext.Provider
@@ -106,6 +113,7 @@ const PointProvider = ({children}) => {
                 point: state.point,
                 points: state.points,
                 originalPoints: state.originalPoints,
+                setPage,
                 setPoint,
                 setPoints,
                 setDataLoaded,

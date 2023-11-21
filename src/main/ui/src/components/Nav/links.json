@@ -2,15 +2,15 @@
     "links": [
         {
             "label": "Home",
-            "href": "/home"
+            "href": "/"
         },
         {
-            "label": "About",
-            "href": "/About"
+            "label": "Admin",
+            "href": "/admin"
         },
         {
             "label": "Contact",
-            "href": "/Contact"
+            "href": "/contact"
         }
     ]
 }
