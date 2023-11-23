@@ -15,14 +15,20 @@ services:
       - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    restart: always
+    volumes:
+      - ./appData:/app/fileStorage
 
   db:
     image: 'postgres:13-alpine'
     container_name: db
-#    ports:
-#      - "5432:5432"
-    expose:  # если наружу не надо
+    #    ports:
+    #      - "5432:5432"
+    expose: # если наружу не надо
       - 5432
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
+    restart: always
+    volumes:
+      - ./dbData:/var/lib/postgresql/data

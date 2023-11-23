@@ -1,0 +1,9 @@
+version: '2.4'
+services:
+
+  ## Run containers as App-User (no problems with Read/Write files/dirs)
+  app:
+    user: "${USER_UID}:${USER_GID}"
+
+#  db:
+#    user: "${USER_UID}:${USER_GID}"
