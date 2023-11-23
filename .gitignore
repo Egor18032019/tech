@@ -38,6 +38,7 @@ build/
 *.local
 ## App
 .env
+docker-compose.override.yml
 fileStorage
 appData
 dbData
