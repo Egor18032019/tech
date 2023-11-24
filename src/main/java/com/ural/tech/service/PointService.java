@@ -3,6 +3,8 @@ package com.ural.tech.service;
 import com.ural.tech.schemas.AllPointResponse;
 import com.ural.tech.schemas.PointRequest;
 import com.ural.tech.schemas.PointResponse;
+import com.ural.tech.store.Petition;
+import com.ural.tech.store.PetitionRepository;
 import com.ural.tech.store.Points;
 import com.ural.tech.store.PointsRepository;
 import com.ural.tech.utils.Status;
@@ -17,9 +19,11 @@ import java.util.Optional;
 public class PointService {
 
     PointsRepository pointsRepository;
+    PetitionRepository petitionRepository;
 
-    public PointService(PointsRepository pointsRepository) {
+    public PointService(PointsRepository pointsRepository, PetitionRepository petitionRepository) {
         this.pointsRepository = pointsRepository;
+        this.petitionRepository = petitionRepository;
     }
 
     public AllPointResponse getAllPointForResponse(String coordinates, Optional<Integer> limit, Optional<Integer> offset) {
@@ -88,7 +92,6 @@ public class PointService {
     }
 
 
-
     public Points updatePoint(Points point) {
         //todo переделать
         pointsRepository.save(point);
@@ -99,5 +102,15 @@ public class PointService {
         Long id = Long.valueOf(idPoint);
         pointsRepository.deleteById(id);
 
+    }
+
+    public Petition savePetition(Status status, String description, Path pathToImage) {
+        Petition petition = new Petition(status.getStatus(), description, pathToImage.toString());
+        return petitionRepository.save(petition);
+    }
+
+    public Petition savePetition(Status status, String description) {
+        Petition petition = new Petition(status.getStatus(), description);
+        return petitionRepository.save(petition);
     }
 }

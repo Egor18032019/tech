@@ -5,15 +5,15 @@ $hover-color: #0056b3;
 // $base-spacing: 20px;
 
 .form-container {
-  position: absolute;
-  margin-top: -480px;
+  //position: absolute;
+  //margin-top: -480px;
+  //margin-left: 42%;
   min-width: 300px;
   // margin: $base-spacing auto;
   padding: 10px;
   border: 2px solid $border-color;
   border-radius: 4px;
   font-size: small;
-  margin-left: 42%;
 }
 
 .upload-form {
