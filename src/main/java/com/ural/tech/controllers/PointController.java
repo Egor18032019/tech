@@ -96,7 +96,6 @@ public class PointController {
     @Operation(
             summary = "Запрос на получение фото обращения",
             description = "На вход ждет имя файла"
-
     )
     @GetMapping(value = EndPoint.image,
             produces = MediaType.IMAGE_JPEG_VALUE)
