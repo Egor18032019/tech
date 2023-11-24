@@ -19,11 +19,10 @@ import java.util.Optional;
 public class PointService {
 
     PointsRepository pointsRepository;
-    PetitionRepository petitionRepository;
 
-    public PointService(PointsRepository pointsRepository, PetitionRepository petitionRepository) {
+
+    public PointService(PointsRepository pointsRepository) {
         this.pointsRepository = pointsRepository;
-        this.petitionRepository = petitionRepository;
     }
 
     public AllPointResponse getAllPointForResponse(String coordinates, Optional<Integer> limit, Optional<Integer> offset) {
@@ -40,7 +39,7 @@ public class PointService {
                 System.out.println("  throw new BadRequestException(\"The limit cannot be less than 1.\");");
                 realLimit = pointEntities.size();
             }
-            System.out.println("limit " + limit.get());
+
         }
         if (pointEntities.size() < realLimit) {
             realLimit = pointEntities.size();
@@ -104,13 +103,5 @@ public class PointService {
 
     }
 
-    public Petition savePetition(Status status, String description, Path pathToImage) {
-        Petition petition = new Petition(status.getStatus(), description, pathToImage.toString());
-        return petitionRepository.save(petition);
-    }
 
-    public Petition savePetition(Status status, String description) {
-        Petition petition = new Petition(status.getStatus(), description);
-        return petitionRepository.save(petition);
-    }
 }

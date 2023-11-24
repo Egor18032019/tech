@@ -4,6 +4,7 @@ import com.ural.tech.schemas.PetitionResponse;
 import com.ural.tech.schemas.PointRequest;
 import com.ural.tech.schemas.PointResponse;
 import com.ural.tech.service.FileStorageService;
+import com.ural.tech.service.PetitionService;
 import com.ural.tech.service.PointService;
 import com.ural.tech.store.Petition;
 import com.ural.tech.store.Points;
@@ -23,11 +24,11 @@ import java.nio.file.Path;
 @RequestMapping(EndPoint.api)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PetitionController {
-    PointService pointService;
+    PetitionService petitionService;
     FileStorageService fileStorageService;
 
-    public PetitionController(PointService pointService, FileStorageService fileStorageService) {
-        this.pointService = pointService;
+    public PetitionController(PetitionService petitionService, FileStorageService fileStorageService) {
+        this.petitionService = petitionService;
         this.fileStorageService = fileStorageService;
     }
 
@@ -39,7 +40,6 @@ public class PetitionController {
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public PetitionResponse handleFileUpload(@RequestParam("description") String description,
                                              @RequestParam(value = "file", required = false) MultipartFile file) {
-        //todo проверка координат
         Status status = Status.GREAT;
 
         Petition petitionFromBD;
@@ -47,10 +47,10 @@ public class PetitionController {
 
             Path pathToImage = fileStorageService.save(file);
             System.out.println("pathToImage " + pathToImage);
-            petitionFromBD = pointService.savePetition(status, description, pathToImage);
+            petitionFromBD = petitionService.savePetition(status, description, pathToImage);
         } else {
 
-            petitionFromBD = pointService.savePetition(status, description);
+            petitionFromBD = petitionService.savePetition(status, description);
         }
 
         return new PetitionResponse(petitionFromBD.getId(), status.toString(), petitionFromBD.getDescription(), petitionFromBD.getCreatedAt(), petitionFromBD.getUrlImage());

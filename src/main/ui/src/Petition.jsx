@@ -15,7 +15,7 @@ const Petition = () => {
         const formData = new FormData(event.target);
 
         try {
-            await sendPost("petition", formData);
+            await sendPost(petition, formData);
             setNotification({
                 message: "Данные успешно отправлены!",
                 type: "success",
