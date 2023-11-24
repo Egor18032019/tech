@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {useContextMap} from "./PointReducer";
 import {url, api, allNews} from "./Const";
 
 function NewsList() {
