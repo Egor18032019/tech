@@ -14,12 +14,16 @@
             "href": "/map"
         },
         {
-            "label": "Admin",
-            "href": "/admin"
+            "label": "AdminMapUpdate",
+            "href": "/admin/update"
         },
         {
             "label": "AdminMap",
             "href": "/admin/map"
+        },
+        {
+            "label": "AdminNews",
+            "href": "/admin/news"
         },
         {
             "label": "Contact",
