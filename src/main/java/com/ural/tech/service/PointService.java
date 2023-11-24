@@ -3,6 +3,8 @@ package com.ural.tech.service;
 import com.ural.tech.schemas.AllPointResponse;
 import com.ural.tech.schemas.PointRequest;
 import com.ural.tech.schemas.PointResponse;
+import com.ural.tech.store.Petition;
+import com.ural.tech.store.PetitionRepository;
 import com.ural.tech.store.Points;
 import com.ural.tech.store.PointsRepository;
 import com.ural.tech.utils.Status;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class PointService {
 
     PointsRepository pointsRepository;
+
 
     public PointService(PointsRepository pointsRepository) {
         this.pointsRepository = pointsRepository;
@@ -36,7 +39,7 @@ public class PointService {
                 System.out.println("  throw new BadRequestException(\"The limit cannot be less than 1.\");");
                 realLimit = pointEntities.size();
             }
-            System.out.println("limit " + limit.get());
+
         }
         if (pointEntities.size() < realLimit) {
             realLimit = pointEntities.size();
@@ -88,7 +91,6 @@ public class PointService {
     }
 
 
-
     public Points updatePoint(Points point) {
         //todo переделать
         pointsRepository.save(point);
@@ -100,4 +102,6 @@ public class PointService {
         pointsRepository.deleteById(id);
 
     }
+
+
 }

@@ -38,7 +38,7 @@ public class PointController {
     }
 
     @Operation(
-            summary = "Создание обращение",
+            summary = "Создание точки на карте",
             description = "Получение данных для создание заявки. Ждет на вход координаты и описание проблемы и опционально файл"
     )
     @PostMapping(value = EndPoint.creatPoint)

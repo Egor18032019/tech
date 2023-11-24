@@ -4,9 +4,8 @@ import "./Form.scss";
 import sendPost from "./ServiceCalls";
 import FormField from "./FormField";
 import {useContextMap} from "./PointReducer";
-import {point} from "./Const";
-const Form = () => {
-    const {coordinates} = useContextMap();
+import {petition} from "./Const";
+const Petition = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [notification, setNotification] = useState({message: "", type: ""});
     const [image, setImage] = useState(null);
@@ -16,7 +15,7 @@ const Form = () => {
         const formData = new FormData(event.target);
 
         try {
-            await sendPost(point, formData);
+            await sendPost(petition, formData);
             setNotification({
                 message: "Данные успешно отправлены!",
                 type: "success",
@@ -65,16 +64,11 @@ const Form = () => {
                         Загрузить фото...
                     </label>
                 </div>
-                {/*TODO Осман поправь тут ))*/}
-                <div className="form-group">
-                    <label htmlFor={"pointCoordinates"}>{"Координаты точки:"}</label>
-                    <input type={"text"} id={"pointCoordinates"} name={"pointCoordinates"} className={"form-control"}
-                           value={coordinates} readOnly={true}/>
-                </div>
+
 
 
                 <FormField
-                    label="Описание нарушения:"
+                    label="Текст обращения:"
                     type="text"
                     id="description"
                     name="description"
@@ -89,7 +83,7 @@ const Form = () => {
                 </div>
             </form>
             <div className="form__photo">
-                 <img className="img_upload"   src={`${image}`} />
+                <img className="img_upload"   src={`${image}`} />
                 {/*<img className="img_upload"   src="https://th.bing.com/th/id/OIP.8ZewQ5pH3-DwDX3OKhpY2AAAAA?w=474&h=572&rs=1&pid=ImgDetMain"/>*/}
             </div>
             {notification.message && (
@@ -98,8 +92,8 @@ const Form = () => {
                 </div>
             )}
         </div>
-      )}
+    )}
 
 
 
-export default Form;
+export default Petition;

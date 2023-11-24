@@ -1,12 +1,29 @@
+
 {
     "links": [
         {
-            "label": "Home",
+            "label": "News",
             "href": "/"
         },
         {
-            "label": "Admin",
-            "href": "/admin"
+            "label": "Petition",
+            "href": "/petition"
+        },
+        {
+            "label": "Map",
+            "href": "/map"
+        },
+        {
+            "label": "AdminMapUpdate",
+            "href": "/admin/update"
+        },
+        {
+            "label": "AdminMap",
+            "href": "/admin/map"
+        },
+        {
+            "label": "AdminNews",
+            "href": "/admin/news"
         },
         {
             "label": "Contact",

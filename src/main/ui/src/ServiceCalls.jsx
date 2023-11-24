@@ -1,10 +1,10 @@
-import {url} from "./Const";
+import {url, api} from "./Const";
 
 
 const sendPost = async (route, formData) => {
 
     try {
-        const response = await fetch(url + `/api/${route}`, {
+        const response = await fetch(url + api + `${route}`, {
             method: 'POST',
             body: formData,
         });

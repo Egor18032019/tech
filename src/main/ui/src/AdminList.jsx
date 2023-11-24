@@ -3,7 +3,7 @@ import {useContextMap} from "./PointReducer";
 import {url} from "./Const";
 import Draft from "./Draft";
 
-function Admin() {
+function AdminList() {
     const [places, setPlaces] = useState(null);
     const {page, setPage} = useContextMap();
 
@@ -92,4 +92,4 @@ function Admin() {
     };
 }
 
-export default Admin;
+export default AdminList;
