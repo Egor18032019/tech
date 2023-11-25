@@ -9,15 +9,11 @@ import React from "react";
 function WhitMapCardForm( ) {
 
     return (
-
         <div>
-
                 <BranchesMap/>
                 <Card/>
                 <Form/>
-
         </div>
-
     );
 }
 export default WhitMapCardForm;
