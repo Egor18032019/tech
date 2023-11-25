@@ -19,16 +19,16 @@ services:
     volumes:
       - ./appData:/app/fileStorage
 
-#  db:
-#    image: 'postgres:13-alpine'
-#    container_name: db
-#    #    ports:
-#    #      - "5432:5432"
-#    expose: # если наружу не надо
-#      - 5432
-#    environment:
-#      - POSTGRES_USER=${DB_USERNAME}
-#      - POSTGRES_PASSWORD=${DB_PASSWORD}
-#    restart: always
-#    volumes:
-#      - ./dbData:/var/lib/postgresql/data
+  db:
+    image: 'postgres:13-alpine'
+    container_name: db
+    #    ports:
+    #      - "5432:5432"
+    expose: # если наружу не надо
+      - 5432
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    restart: always
+    volumes:
+      - ./dbData:/var/lib/postgresql/data

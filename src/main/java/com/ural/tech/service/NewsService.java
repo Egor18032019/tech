@@ -75,4 +75,9 @@ public class NewsService {
         return new AllNewsResponse(newsResponses, realLimit, realOffset);
 
     }
+
+    public void delete(String id) {
+        Long idNews = Long.valueOf(id);
+        newsRepository.deleteById(idNews);
+    }
 }

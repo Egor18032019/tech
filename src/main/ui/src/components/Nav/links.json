@@ -22,6 +22,10 @@
             "href": "/admin/update"
         },
         {
+            "label": "Редактирование новостей(админка)",
+            "href": "/admin/newsUpdate"
+        },
+        {
             "label": "Карта(админка)",
             "href": "/admin/map"
         },
