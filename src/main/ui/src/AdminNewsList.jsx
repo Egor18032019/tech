@@ -19,10 +19,8 @@ function AdminNewsList() {
                 "Access-Control-Allow-Credentials": "true",
                 "Access-Control-Allow-Methods": "GET",
             }
-
         });
 //todo убрать лишнее limit and ofset
-
         const data = await response.json();
         if (setNews) {
             setNews(data.newsList)
@@ -68,10 +66,8 @@ function AdminNewsList() {
             </ul>
             <span>следующее</span>
             <span>предыдущие</span>
-
         </div>
     )
-}
-;
+};
 
 export default AdminNewsList;
