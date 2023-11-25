@@ -29,3 +29,7 @@ http://localhost:8080/
 - Добавить дизайн(футер,хедер и т.п.)
 ## бэкенд
  
+git remote add tech https://git.codenrock.com/urbathon/template.git
+git branch -M main
+git push -uf tech main
+
