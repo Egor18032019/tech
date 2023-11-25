@@ -1,12 +1,9 @@
 package com.ural.tech.service;
 
 import com.ural.tech.schemas.AllNewsResponse;
-import com.ural.tech.schemas.AllPointResponse;
 import com.ural.tech.schemas.NewsResponse;
-import com.ural.tech.schemas.PointResponse;
 import com.ural.tech.store.News;
 import com.ural.tech.store.NewsRepository;
-import com.ural.tech.store.Points;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
@@ -32,7 +29,7 @@ public class NewsService {
         return newsRepository.save(news);
     }
 
-    public AllNewsResponse getAllPointForResponse(Optional<Integer> limit, Optional<Integer> offset) {
+    public AllNewsResponse getAllNewsForResponse(Optional<Integer> limit, Optional<Integer> offset) {
         List<News> newsList = newsRepository.findAll();
 
         int realLimit = newsList.size();
@@ -75,8 +72,12 @@ public class NewsService {
             newsResponses.add(newsResponse);
         }
 
-        AllNewsResponse getCouriersResponse = new AllNewsResponse(newsResponses, realLimit, realOffset);
-        return getCouriersResponse;
+        return new AllNewsResponse(newsResponses, realLimit, realOffset);
 
+    }
+
+    public void delete(String id) {
+        Long idNews = Long.valueOf(id);
+        newsRepository.deleteById(idNews);
     }
 }

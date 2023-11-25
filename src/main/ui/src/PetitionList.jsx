@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from "react";
-import {url, api, allNews} from "./Const";
+import {url, api, allPetition} from "./Const";
+import Petition from "./Petition";
 
-function NewsList() {
-    const [news, setNews] = useState(null);
+function PetitionList() {
+    const [petitions, setPetition] = useState(null);
 
     useEffect(() => {
-        console.log("NewsList")
-        handleFindAllNews()
+        console.log("PetitionList")
+        handleFindAllPetition()
     }, []);
 
-    const handleFindAllNews = async () => {
+    const handleFindAllPetition = async () => {
 
-        const response = await fetch(url + api  +"/news"+ allNews, {
+        const response = await fetch(url + api + allPetition, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -22,20 +23,20 @@ function NewsList() {
 
         });
 //todo убрать лишнее limit and ofset
-
+//todo вынетси все /all отдельную функцию
         const data = await response.json();
-        if (setNews) {
-            setNews(data.newsList)
+        if (setPetition) {
+            setPetition(data.petitionList)
         }
 
     };
 
 
     return (<div className="news-container">
-            <h1>Новости</h1>
+            <h1>Обращение граждан </h1>
             <ul>
                 {/* Отображение новостей */}
-                {news && news.map((i) => (
+                {petitions && petitions.map((i) => (
                     <li key={i.id}>
                         <span>{i.status}</span>
                         <span>{i.coordinates}</span>
@@ -54,4 +55,4 @@ function NewsList() {
 }
 ;
 
-export default NewsList;
+export default PetitionList;

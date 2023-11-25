@@ -3,7 +3,7 @@ import "./Form.scss";
 import sendPost from "./ServiceCalls";
 import FormField from "./FormField";
 import {useContextMap} from "./PointReducer";
-import {news} from "./Const";
+import {news,great} from "./Const";
 
 const News = () => {
 
@@ -16,7 +16,7 @@ const News = () => {
             const formData = new FormData(event.target);
 
             try {
-                await sendPost(news, formData);
+                await sendPost(news + great, formData);
                 setNotification({
                     message: "Данные успешно отправлены!",
                     type: "success",

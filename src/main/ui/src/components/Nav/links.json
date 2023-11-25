@@ -6,27 +6,35 @@
             "href": "/"
         },
         {
-            "label": "Petition",
+            "label": "Создать обращение",
             "href": "/petition"
         },
         {
-            "label": "Map",
+            "label": "Карта",
             "href": "/map"
         },
         {
-            "label": "AdminMapUpdate",
+            "label": "Обращения(админка)",
+            "href": "/admin/petitions"
+        },
+        {
+            "label": "Заявки по карте(админка)",
             "href": "/admin/update"
         },
         {
-            "label": "AdminMap",
+            "label": "Редактирование новостей(админка)",
+            "href": "/admin/newsUpdate"
+        },
+        {
+            "label": "Карта(админка)",
             "href": "/admin/map"
         },
         {
-            "label": "AdminNews",
+            "label": "Создание новостей(админка)",
             "href": "/admin/news"
         },
         {
-            "label": "Contact",
+            "label": "Контакты",
             "href": "/contact"
         }
     ]

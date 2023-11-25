@@ -1,15 +1,12 @@
 package com.ural.tech.controllers;
 
 import com.ural.tech.schemas.AllNewsResponse;
-import com.ural.tech.schemas.AllPointResponse;
 import com.ural.tech.schemas.NewsResponse;
-import com.ural.tech.schemas.PetitionResponse;
+import com.ural.tech.schemas.PointResponse;
 import com.ural.tech.service.FileStorageService;
 import com.ural.tech.service.NewsService;
 import com.ural.tech.store.News;
-import com.ural.tech.store.Petition;
 import com.ural.tech.utils.EndPoint;
-import com.ural.tech.utils.Status;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,7 +21,7 @@ import java.util.Optional;
 
 @Tag(name = "Создание новостей.(изменение)")
 @RestController
-@RequestMapping(EndPoint.api)
+@RequestMapping(EndPoint.api + EndPoint.news)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class NewsController {
     NewsService newsService;
@@ -39,7 +36,7 @@ public class NewsController {
             summary = "Создание обращения",
             description = "Получение данных для создание обращения. Ждет на вход  описание проблемы и опционально фото"
     )
-    @PostMapping(value = EndPoint.creatNews)
+    @PostMapping(value = EndPoint.great)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public NewsResponse handleFileUpload(@RequestParam("description") String description,
                                          @RequestParam(value = "file", required = false) MultipartFile file) {
@@ -68,10 +65,20 @@ public class NewsController {
     @GetMapping(value = EndPoint.allNews)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public AllNewsResponse allPointResponse(@Parameter(schema = @Schema(implementation = AllNewsResponse.class))
-                                             @RequestParam(value = "limit", required = false) Optional<Integer> limit,
+                                            @RequestParam(value = "limit", required = false) Optional<Integer> limit,
                                             @RequestParam(value = "offset", required = false) Optional<Integer> offset) {
 
-        return newsService.getAllPointForResponse(limit, offset);
+        return newsService.getAllNewsForResponse(limit, offset);
     }
 
+    @Operation(
+            summary = "Запрос на удаление одной новости",
+            description = "На вход ждет id новости"
+    )
+    @DeleteMapping(value = {"{id}"})
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
+    public NewsResponse deletePoint(@PathVariable String id) {
+        newsService.delete(id);
+        return new NewsResponse();
+    }
 }

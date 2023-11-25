@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {url, api, allNews} from "./Const";
+import {url, api, allNews, deleteNews} from "./Const";
 
-function NewsList() {
+function AdminNewsList() {
     const [news, setNews] = useState(null);
 
     useEffect(() => {
@@ -11,7 +11,7 @@ function NewsList() {
 
     const handleFindAllNews = async () => {
 
-        const response = await fetch(url + api  +"/news"+ allNews, {
+        const response = await fetch(url + api + "/news" + allNews, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -29,6 +29,19 @@ function NewsList() {
         }
 
     };
+    const handleDeletePoint = async (id) => {
+
+        const response = await fetch(url + api + "/news"  + "/" + id, {
+            method: "Delete",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Methods": "GET",
+            }
+
+        });
+    }
 
 
     return (<div className="news-container">
@@ -42,7 +55,14 @@ function NewsList() {
                         <span>{i.description}</span>
                         <span>{i.createdAt}</span>
                         <img className={"img_card"} width={"300px"} src={"/api/" + i.pathToImage}/>
-
+                        <button onClick={(event) => {
+                            event.preventDefault()
+                            console.log(event)
+                            console.log(i.id)
+                            handleDeletePoint(i.id)
+                            handleFindAllNews()
+                        }}> удалить
+                        </button>
                     </li>
                 ))}
             </ul>
@@ -54,4 +74,4 @@ function NewsList() {
 }
 ;
 
-export default NewsList;
+export default AdminNewsList;
