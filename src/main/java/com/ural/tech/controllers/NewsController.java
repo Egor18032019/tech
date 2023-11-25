@@ -1,15 +1,11 @@
 package com.ural.tech.controllers;
 
 import com.ural.tech.schemas.AllNewsResponse;
-import com.ural.tech.schemas.AllPointResponse;
 import com.ural.tech.schemas.NewsResponse;
-import com.ural.tech.schemas.PetitionResponse;
 import com.ural.tech.service.FileStorageService;
 import com.ural.tech.service.NewsService;
 import com.ural.tech.store.News;
-import com.ural.tech.store.Petition;
 import com.ural.tech.utils.EndPoint;
-import com.ural.tech.utils.Status;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -71,7 +67,7 @@ public class NewsController {
                                              @RequestParam(value = "limit", required = false) Optional<Integer> limit,
                                             @RequestParam(value = "offset", required = false) Optional<Integer> offset) {
 
-        return newsService.getAllPointForResponse(limit, offset);
+        return newsService.getAllNewsForResponse(limit, offset);
     }
 
 }

@@ -3,6 +3,7 @@ package com.ural.tech.utils;
 public class EndPoint {
     public static final String creatPoint = "/point";
     public static final String creatPetition = "/petition";
+    public static final String allPetition = "/allPetition";
     public static final String creatNews = "/news";
     public static final String all = "/all";
     public static final String allNews = "/allNews";

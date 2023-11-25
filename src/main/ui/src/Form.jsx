@@ -4,7 +4,7 @@ import "./Form.scss";
 import sendPost from "./ServiceCalls";
 import FormField from "./FormField";
 import {useContextMap} from "./PointReducer";
-
+import {creatPoint} from "./Const";
 const Form = () => {
     const {coordinates} = useContextMap();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,7 +16,7 @@ const Form = () => {
         const formData = new FormData(event.target);
 
         try {
-            await sendPost("creat", formData);
+            await sendPost(creatPoint, formData);
             setNotification({
                 message: "Данные успешно отправлены!",
                 type: "success",
