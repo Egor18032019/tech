@@ -23,13 +23,13 @@ public class PetitionService {
         this.petitionRepository = petitionRepository;
     }
 
-    public Petition savePetition(Status status, String description, Path pathToImage) {
-        Petition petition = new Petition(status.getStatus(), description, pathToImage.toString());
+    public Petition savePetition(Status status, String topic,String description, Path pathToImage) {
+        Petition petition = new Petition(status.getStatus(),topic, description, pathToImage.toString());
         return petitionRepository.save(petition);
     }
 
-    public Petition savePetition(Status status, String description) {
-        Petition petition = new Petition(status.getStatus(), description);
+    public Petition savePetition(Status status,String topic,String description) {
+        Petition petition = new Petition(status.getStatus(),topic, description);
         return petitionRepository.save(petition);
     }
 

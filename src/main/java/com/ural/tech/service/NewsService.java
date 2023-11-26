@@ -19,13 +19,13 @@ public class NewsService {
         this.newsRepository = newsRepository;
     }
 
-    public News savePetition(String description, Path pathToImage) {
-        News news = new News(description, pathToImage.toString());
+    public News saveNews(String description, Path pathToImage, String start, String end) {
+        News news = new News(description, pathToImage.toString(), start, end);
         return newsRepository.save(news);
     }
 
-    public News savePetition(String description) {
-        News news = new News(description);
+    public News saveNews(String description, String start, String end) {
+        News news = new News(description, start, end);
         return newsRepository.save(news);
     }
 
@@ -68,7 +68,7 @@ public class NewsService {
         for (int i = realOffset; i < realLimit; i++) {
             News point = newsList.get(i);
 
-            NewsResponse newsResponse = new NewsResponse(point.getId(),  point.getDescription(), point.getCreatedAt(), point.getUrlImage());
+            NewsResponse newsResponse = new NewsResponse(point.getId(), point.getDescription(), point.getBeginning(), point.getFinish(), point.getCreatedAt(), point.getUrlImage());
             newsResponses.add(newsResponse);
         }
 

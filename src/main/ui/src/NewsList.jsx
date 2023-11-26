@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {url, api, allNews} from "./Const";
-
+import "./NewsList.scss";
 function NewsList() {
     const [news, setNews] = useState(null);
 
@@ -11,7 +11,7 @@ function NewsList() {
 
     const handleFindAllNews = async () => {
 
-        const response = await fetch(url + api  +"/news"+ allNews, {
+        const response = await fetch(url + api + "/news" + allNews, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -33,7 +33,16 @@ function NewsList() {
 
     return (<div className="news-container">
             <h1>Новости</h1>
+            <div className={"news-container_filter"}>
+            <input type={"checkbox"}/>
+            <label> Фильтр 1</label>
+            <input type={"checkbox"}/>
+            <label> Фильтр 2</label>
+            <input type={"checkbox"}/>
+            <label> Фильтр 3</label>
+            </div>
             <ul>
+
                 {/* Отображение новостей */}
                 {news && news.map((i) => (
                     <li key={i.id}>
@@ -42,12 +51,11 @@ function NewsList() {
                         <span>{i.description}</span>
                         <span>{i.createdAt}</span>
                         <img className={"img_card"} width={"300px"} src={"/api/" + i.pathToImage}/>
-
                     </li>
                 ))}
             </ul>
-            <span>следующее</span>
             <span>предыдущие</span>
+            <span>следующее   </span>
 
         </div>
     )

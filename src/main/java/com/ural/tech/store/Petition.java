@@ -21,6 +21,8 @@ public class Petition {
     @Column()
     String status;
     @Column()
+    String topic;
+    @Column()
     String description;
     @Column()
     String urlImage;
@@ -33,14 +35,16 @@ public class Petition {
     public Petition() {
     }
 
-    public Petition(String status, String description, String urlImage) {
+    public Petition(String status, String topic, String description) {
         this.status = status;
+        this.topic = topic;
         this.description = description;
-        this.urlImage = urlImage;
     }
 
-    public Petition(String status, String description) {
+    public Petition(String status, String topic, String description, String urlImage) {
         this.status = status;
+        this.topic = topic;
         this.description = description;
+        this.urlImage = urlImage;
     }
 }

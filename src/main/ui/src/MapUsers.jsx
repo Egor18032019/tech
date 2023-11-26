@@ -85,7 +85,17 @@ const MapUsers = () => {
                             iconImageSize: [30, 30],
                             preset: "islands#redIcon",
                             hideIconOnBalloonOpen: false,
-                            openEmptyHint: true
+                            openEmptyHint: true,
+                            draggable: true
+                        }}
+                        onDragEnd={() => {
+                            // @ts-ignore
+                            const coords = ref.current.geometry._coordinates;
+                            if (setCoordinates) {
+                                setCoordinates(coords)
+                            }
+                            console.log("onDragEnd " + coords);
+                            setUserCoords(coords)
                         }}
                     />
 
