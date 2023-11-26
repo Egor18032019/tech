@@ -21,8 +21,6 @@ function NewsList() {
             }
 
         });
-//todo убрать лишнее limit and ofset
-
         const data = await response.json();
         if (setNews) {
             setNews(data.newsList)

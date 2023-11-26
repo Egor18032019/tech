@@ -27,8 +27,6 @@ public class Petition {
     @Column()
     String urlImage;
 
-    //todo сылка на файл в виде строки
-
     @Column()
     Instant createdAt = Instant.now();
 

@@ -23,7 +23,6 @@ const Card = () => {
             }
 
         });
-//todo убрать лишнее limit and ofset
         const data = await response;
         setImage(data.url)
     };

@@ -64,7 +64,7 @@ public class NewsService {
 
 
         List<NewsResponse> newsResponses = new ArrayList<>();
-        //TODO может из БД лимит и офсет тащить
+        //TODO может из БД лимит и офсет sql запросом?
         for (int i = realOffset; i < realLimit; i++) {
             News point = newsList.get(i);
 

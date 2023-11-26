@@ -5,7 +5,6 @@ const FormField = ({label, type, id, name, className, value}) => {
 
     return (<div className="form-group">
             <label htmlFor={id}>{label}</label>
-            {/*//TODO Осман посмотри тут ошибку пжлуста */}
             <input type={type} id={id} name={name} className={className} value={input}
 
                    onChange={(e) => {

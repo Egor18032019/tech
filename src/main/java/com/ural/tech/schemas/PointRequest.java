@@ -12,11 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Schema(description = "Входящий запрос с координатами точки + описание проблемы + фото")
 public class PointRequest {
-
     @Schema(description = "координаты в формате 60.497874,56.926760 ")
     String pointCoordinates; //point: [56.800584, 60.675637]}
     @Schema(description = "Описание проблемы")
     String description ; // "яма на дороге"
-    //todo  приоритет ? авария или не авария
-
 }
