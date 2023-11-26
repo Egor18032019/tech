@@ -1,11 +1,10 @@
 package com.ural.tech.controllers;
 
-import com.ural.tech.schemas.*;
+import com.ural.tech.schemas.AllPetitionResponse;
+import com.ural.tech.schemas.PetitionResponse;
 import com.ural.tech.service.FileStorageService;
 import com.ural.tech.service.PetitionService;
-import com.ural.tech.service.PointService;
 import com.ural.tech.store.Petition;
-import com.ural.tech.store.Points;
 import com.ural.tech.utils.EndPoint;
 import com.ural.tech.utils.Status;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,11 +34,13 @@ public class PetitionController {
 
     @Operation(
             summary = "Создание обращения",
-            description = "Получение данных для создание обращения. Ждет на вход  описание проблемы и опционально фото"
+            description = "Получение данных для создание обращения. Ждет на вход тема, описание проблемы и опционально фото"
     )
     @PostMapping(value = EndPoint.creatPetition)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public PetitionResponse handleFileUpload(@RequestParam("description") String description,
+    public PetitionResponse handleFileUpload(
+            @RequestParam("topic") String topic,
+            @RequestParam("description") String description,
                                              @RequestParam(value = "file", required = false) MultipartFile file) {
         Status status = Status.GREAT;
 
@@ -48,10 +49,10 @@ public class PetitionController {
 
             Path pathToImage = fileStorageService.save(file);
             System.out.println("pathToImage " + pathToImage);
-            petitionFromBD = petitionService.savePetition(status, description, pathToImage);
+            petitionFromBD = petitionService.savePetition(status,topic, description, pathToImage);
         } else {
 
-            petitionFromBD = petitionService.savePetition(status, description);
+            petitionFromBD = petitionService.savePetition(status,topic, description);
         }
 
         return new PetitionResponse(petitionFromBD.getId(), status.toString(), petitionFromBD.getDescription(), petitionFromBD.getCreatedAt(), petitionFromBD.getUrlImage());

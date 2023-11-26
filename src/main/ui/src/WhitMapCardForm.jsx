@@ -5,15 +5,19 @@ import Card from "./Card";
 import Form from "./Form";
 import React from "react";
 
+import {creatPoint} from "./Const";
 
-function WhitMapCardForm( ) {
+function WhitMapCardForm() {
 
     return (
         <div>
-                <BranchesMap/>
-                <Card/>
-                <Form/>
+            <BranchesMap/>
+            <Card/>
+            <Form
+                endpoint={creatPoint}
+            />
         </div>
     );
 }
+
 export default WhitMapCardForm;

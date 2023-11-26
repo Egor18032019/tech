@@ -13,12 +13,8 @@
 
 В браузере зайти на сайт
 http://localhost:8080/
-Должен появиться
-Взять пин на карте и переместить в точку обращение
-в форме вести описание обращения
-на карте появляется новая точка
-При клике на точку отображаеться обращение и фото
-Документаци лежит тут http://localhost:8080/swagger-ui/index.html
+ 
+Документация лежит тут http://localhost:8080/swagger-ui/index.html
 или http://localhost:8080/v3/api-docs
 или в виде файла openapi.yaml
 # TODO
@@ -29,7 +25,6 @@ http://localhost:8080/
 - Добавить дизайн(футер,хедер и т.п.)
 ## бэкенд
  
-git remote add tech https://git.codenrock.com/urbathon/template.git
-git branch -M main
-git push -uf tech main
+ 
+git push -uf urb tech
 

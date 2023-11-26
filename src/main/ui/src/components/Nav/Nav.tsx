@@ -31,7 +31,7 @@ const Nav: React.FC<{}> = () => {
     return (
         <nav className={styles.navbar}>
             <div className={styles['logo-container']}>
-                <span>Logo</span>
+                <span>Навигатор чистоты</span>
             </div>
 
             <Links links={links} />

@@ -4,7 +4,7 @@ import {useContext, useReducer} from 'react';
 type ContextProps = {
     page: string,
     point: {} | null,
-    coordinates: any, //todo null ??
+    coordinates: any,
     points: PointsData[],
     originalPoints: PointsData[],
     setPage: (string: any) => void,

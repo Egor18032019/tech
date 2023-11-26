@@ -24,11 +24,8 @@ function AdminList() {
             }
 
         });
-//todo убрать лишнее limit and ofset
-
         const data = await response.json();
 
-        console.log("handleFindAllBranch")
         if (setPlaces) {
             setPlaces(data.points)
         }
@@ -62,7 +59,7 @@ function AdminList() {
                         <span>{i.coordinates}</span>
                         <span>{i.description}</span>
                         <span>{i.createdAt}</span>
-                        <img className={"img_card"} width={"300px"} src={"/api/"+i.pathToImage}/>
+                        <img className={"img_card"} width={"300px"} src={"/api/" + i.pathToImage}/>
                         <button onClick={(event) => {
                             event.preventDefault()
                             console.log(event)
@@ -87,7 +84,8 @@ function AdminList() {
         </div>
     } else {
         return <Draft/>
-    };
+    }
+    ;
 }
 
 export default AdminList;
