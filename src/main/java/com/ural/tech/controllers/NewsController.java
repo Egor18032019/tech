@@ -43,7 +43,7 @@ public class NewsController {
             @RequestParam("end") String end,
 
             @RequestParam(value = "file", required = false) MultipartFile file) {
-
+        System.out.println("  @PostMapping(value = EndPoint.great)");
         News news;
         if (file != null && !file.isEmpty()) {
 
