@@ -8,13 +8,15 @@
 *.swp
 
 ## Backups
+*~
 *.bak
 *.local
-*~
+*.swp
 ## Local
 .DS_Store
 .env
 *.log
+\?
 
 ## Ignore all git- and docker- stuff, hidden files
 Dockerfile*
@@ -22,7 +24,15 @@ Dockerfile*
 ## Ignore MarkDown-Docs
 *.md
 ## local dev-stuff
+docker-compose*.yml
+docker-compose*.yaml
+mvnw*
 Makefile*
 
 ## App
+app*.local.jar
+!app.local.jar
+appData*
+dbData*
+fileStorage
 src/main/ui
