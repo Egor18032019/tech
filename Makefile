@@ -48,7 +48,6 @@ list-images:
         docker images | grep $(PROJECT_NAME)
 
 run-dev:
-#       source .env
         docker run -it --rm -u `id -u`:`id -g` -v `pwd`:/mnt -w /mnt \
                 -e HOME="/mnt" \
                 -p 8091:8080 \
