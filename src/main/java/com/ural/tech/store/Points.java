@@ -1,6 +1,7 @@
 package com.ural.tech.store;
 
 
+import com.ural.tech.store.entity.AbstractBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,14 +12,7 @@ import java.time.Instant;
 @Table(name = "status")
 @Getter
 @Setter
-public class Points {
-
-    public static final int START_SEQ = 10;
-    @Id
-    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-    @Column(name = "point_id")
-    Long id;
+public class Points extends AbstractBaseEntity {
     @Column()
     String status;
     @Column()

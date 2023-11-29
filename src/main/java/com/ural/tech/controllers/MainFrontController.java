@@ -9,8 +9,12 @@ public class MainFrontController {
 
     @RequestMapping({"/"})
     public String loadUI() {
-
+        System.out.println("loadUI");
         return "forward:/index.html";
     }
-
+//    @RequestMapping({"/auth"})
+//    public String loadLoginForm() {
+//        System.out.println("loadLoginForm");
+//        return "forward:/login.html";
+//    }
 }
