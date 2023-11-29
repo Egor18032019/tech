@@ -1,41 +1,28 @@
-
 {
-    "links": [
-        {
-            "label": "News",
-            "href": "/"
-        },
-        {
-            "label": "Создать обращение",
-            "href": "/petition"
-        },
-        {
-            "label": "Карта",
-            "href": "/map"
-        },
-        {
-            "label": "Обращения(админка)",
-            "href": "/admin/petitions"
-        },
-        {
-            "label": "Заявки по карте(админка)",
-            "href": "/admin/update"
-        },
-        {
-            "label": "Редактирование новостей(админка)",
-            "href": "/admin/newsUpdate"
-        },
-        {
-            "label": "Карта(админка)",
-            "href": "/admin/map"
-        },
-        {
-            "label": "Создание новостей(админка)",
-            "href": "/admin/news"
-        },
-        {
-            "label": "Контакты",
-            "href": "/contact"
-        }
-    ]
+  "links": [
+    {
+      "label": "News",
+      "href": "/"
+    },
+    {
+      "label": "Создание новостей(админка)",
+      "href": "/admin/news"
+    },
+    {
+      "label": "Редактирование новостей(админка)",
+      "href": "/admin/newsUpdate"
+    },
+    {
+      "label": "Создать обращение",
+      "href": "/petition"
+    },
+    {
+      "label": "Обращения(админка)",
+      "href": "/admin/petitions"
+    },
+    {
+      "label": "Контакты",
+      "href": "/contact"
+    }
+  ]
 }

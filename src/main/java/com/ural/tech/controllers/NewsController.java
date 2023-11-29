@@ -2,7 +2,6 @@ package com.ural.tech.controllers;
 
 import com.ural.tech.schemas.AllNewsResponse;
 import com.ural.tech.schemas.NewsResponse;
-import com.ural.tech.schemas.PointResponse;
 import com.ural.tech.service.FileStorageService;
 import com.ural.tech.service.NewsService;
 import com.ural.tech.store.News;
@@ -38,21 +37,25 @@ public class NewsController {
     )
     @PostMapping(value = EndPoint.great)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public NewsResponse handleFileUpload(@RequestParam("description") String description,
-                                         @RequestParam(value = "file", required = false) MultipartFile file) {
+    public NewsResponse handleFileUpload(
+            @RequestParam("description") String description,
+            @RequestParam("start") String start,
+            @RequestParam("end") String end,
 
+            @RequestParam(value = "file", required = false) MultipartFile file) {
+        System.out.println("  @PostMapping(value = EndPoint.great)");
         News news;
         if (file != null && !file.isEmpty()) {
 
             Path pathToImage = fileStorageService.save(file);
             System.out.println("pathToImage " + pathToImage);
-            news = newsService.savePetition(description, pathToImage);
+            news = newsService.saveNews(description, pathToImage, start, end);
         } else {
 
-            news = newsService.savePetition(description);
+            news = newsService.saveNews(description, start, end);
         }
 
-        return new NewsResponse(news.getId(), description, news.getCreatedAt(), news.getUrlImage());
+        return new NewsResponse(news.getId(), description, news.getBeginning(), news.getFinish(), news.getCreatedAt(), news.getUrlImage());
 
     }
 

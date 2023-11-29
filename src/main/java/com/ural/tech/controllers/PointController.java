@@ -46,7 +46,6 @@ public class PointController {
     public PointResponse handleFileUpload(@RequestParam("pointCoordinates") String pointCoordinates,
                                           @RequestParam("description") String description,
                                           @RequestParam(value = "file", required = false) MultipartFile file) {
-        //todo проверка координат
         Status status = Status.GREAT;
         PointRequest request = new PointRequest(pointCoordinates, description);
         Points pointFromBD;

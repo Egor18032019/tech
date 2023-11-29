@@ -1,5 +1,6 @@
 package com.ural.tech.store;
 
+import com.ural.tech.store.entity.AbstractBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,22 +11,17 @@ import java.time.Instant;
 @Table(name = "petition")
 @Getter
 @Setter
-public class Petition {
+public class Petition extends AbstractBaseEntity {
 
-    public static final int START_SEQ = 10;
-    @Id
-    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-    @Column(name = "petition_id")
-    Long id;
+
     @Column()
     String status;
+    @Column()
+    String topic;
     @Column()
     String description;
     @Column()
     String urlImage;
-
-    //todo сылка на файл в виде строки
 
     @Column()
     Instant createdAt = Instant.now();
@@ -33,14 +29,16 @@ public class Petition {
     public Petition() {
     }
 
-    public Petition(String status, String description, String urlImage) {
+    public Petition(String status, String topic, String description) {
         this.status = status;
+        this.topic = topic;
         this.description = description;
-        this.urlImage = urlImage;
     }
 
-    public Petition(String status, String description) {
+    public Petition(String status, String topic, String description, String urlImage) {
         this.status = status;
+        this.topic = topic;
         this.description = description;
+        this.urlImage = urlImage;
     }
 }

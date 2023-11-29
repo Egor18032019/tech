@@ -18,6 +18,10 @@ public class NewsResponse {
     Long id;
     @Schema(description = "Текст новости")
     String description;
+    @Schema(description = "Начало ")
+    String start;
+    @Schema(description = "Окончание")
+    String end;
     @Schema(description = "Время создание/изменения новости")
     Instant createdAt; //
     @Schema(description = "имя файла сохраненного на сервере")
