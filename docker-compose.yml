@@ -1,34 +1,37 @@
-version: '2.4'
+version: '3.8'
 
 services:
   app:
-    image: tech:dev  # либо image, либо build
-#    build:
-#      context: .
-#    container_name: app
+    #    image: tech:dev  # либо image, либо build
+    build:
+      context: .
+    container_name: app
     ports:
       - "${HTTP_HOST_PORT}:8080"
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/db_example
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
     restart: always
     volumes:
       - ./appData:/app/fileStorage
 
   db:
-    image: 'postgres:13-alpine'
-    container_name: db
-    #    ports:
-    #      - "5432:5432"
-    expose: # если наружу не надо
-      - 5432
+    container_name: mysql
+    image: "mysql:latest"
     environment:
-      - POSTGRES_USER=${DB_USERNAME}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      -  MYSQL_DATABASE=${MYSQL_DATABASE}
+      -  MYSQL_USER=${MYSQL_USER}
+      -  MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      -  MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    #    expose:
+    #      - "3306"
+    ports:
+      - "3306:3306"
     restart: always
     volumes:
-      - ./dbData:/var/lib/postgresql/data
+      - ./mysql/data:/var/lib/mysql
+
+

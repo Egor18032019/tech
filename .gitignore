@@ -42,3 +42,4 @@ docker-compose.override.yml
 fileStorage
 appData
 dbData
+mysql
