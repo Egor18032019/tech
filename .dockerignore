@@ -26,5 +26,5 @@ Makefile*
 
 ## App
 src/main/ui
-appData
+#appData
 dbData
