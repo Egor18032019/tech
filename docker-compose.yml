@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
   app:
-    image: tech:dev  # либо image, либо build
+#    image: tech:dev  # либо image, либо build
     build:
       context: .
     container_name: app
@@ -11,7 +11,7 @@ services:
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_URL=${DB_JDBC_URL}
       - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
@@ -29,6 +29,7 @@ services:
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
     restart: always
     volumes:
       - ./dbData:/var/lib/postgresql/data
