@@ -18,6 +18,7 @@ mvn -f pom.xml clean package -D  maven.test.skip=true
 ```shell
 java -jar target/tech-0.0.1-SNAPSHOT.jar --status=running
 ```
+
 ## Usage
 
 В браузере зайти на сайт
