@@ -15,7 +15,7 @@ const MapUsers = () => {
 
     const handleFindAllBranch = async () => {
 
-        const response = await fetch(url + "/api/all?coordinates=60.497874,56.926760", {
+        const response = await fetch(url + "/api/allPetition", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -29,21 +29,19 @@ const MapUsers = () => {
 
         const data = await response.json();
 
-        console.log("handleFindAllBranch")
+
         if (setPoints) {
-            // for (let i = 0; i < data.points.length; i++) {
-            //     data.points[i].coordinates = data.points[i].coordinates.slice(0, data.points[i].coordinates.length - 1).split(",").map(Number)
-            //     console.log(data.points[i].coordinates)
-            // }
-            setPoints(data.points)
+
+            setPoints(data.petitionList)
         }
         if (setOriginalPoints) {
-            setOriginalPoints(data.points)
+            setOriginalPoints(data.petitionList)
         }
 
     };
 //todo запрос на получение гео позиции
     const handleFindUser = async () => {
+            console.log("points " + points[0].pointCoordinates)
         setUserCoords(userCoords);
         if (setCoordinates) {
             console.log("setPoint " + userCoords)
@@ -103,7 +101,7 @@ const MapUsers = () => {
                     {points && points.map((i) => (
                         <Placemark
                             key={i.id}
-                            geometry={i.coordinates}
+                            geometry={i.pointCoordinates}
                             properties={{
                                 hintContent: i.description
                             }}

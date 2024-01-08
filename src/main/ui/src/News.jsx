@@ -128,8 +128,9 @@ const News = () => {
                 </div>
             </form>
             <div className="form__photo">
-                <img className="img_upload" src={`${image}`}/>
-                {/*<img className="img_upload"   src="https://th.bing.com/th/id/OIP.8ZewQ5pH3-DwDX3OKhpY2AAAAA?w=474&h=572&rs=1&pid=ImgDetMain"/>*/}
+                     {image && (
+                                <img className="img_upload"   src={`${image}`} />
+                                     )}
             </div>
             {notification.message && (
                 <div className={`notification ${notification.type}`}>

@@ -47,6 +47,7 @@ public class PetitionController {
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public PetitionResponse handleFileUpload(
             @RequestParam("topic") String topic,
+            @RequestParam("pointCoordinates") String pointCoordinates,
             @RequestParam("description") String description,
                                              @RequestParam(value = "file", required = false) MultipartFile file) {
         Status status = Status.GREAT;
@@ -56,13 +57,13 @@ public class PetitionController {
             LOGGER.info("Сохранение файла");
             Path pathToImage = fileStorageService.save(file);
             LOGGER.info("Сохранение обращения в БД если есть картинка");
-            petitionFromBD = petitionService.savePetition(status,topic, description, pathToImage);
+            petitionFromBD = petitionService.savePetition(status,topic, description,pointCoordinates, pathToImage);
         } else {
             LOGGER.info("Сохранение обращения в БД без картинки");
             petitionFromBD = petitionService.savePetition(status,topic, description);
         }
 
-        return new PetitionResponse(petitionFromBD.getId(), status.toString(), petitionFromBD.getDescription(), petitionFromBD.getCreatedAt(), petitionFromBD.getUrlImage());
+        return new PetitionResponse(petitionFromBD.getId(), status.toString(), petitionFromBD.getDescription(),petitionFromBD.getPointCoordinates(), petitionFromBD.getCreatedAt(), petitionFromBD.getUrlImage());
 
     }
 

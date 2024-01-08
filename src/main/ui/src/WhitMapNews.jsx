@@ -11,11 +11,8 @@ function WhitMapNews() {
     return (
 
         <div>
-
             <MapNews/>
             <News/>
-
-
         </div>
 
     );

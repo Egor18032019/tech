@@ -3,7 +3,7 @@ import Card from "./Card";
 import Form from "./Form";
 import React from "react";
 import MapUsers from "./MapUsers";
-import Petition from "./Petition";
+
 import {petition} from "./Const";
 function WhitMapCard() {
 
@@ -14,8 +14,6 @@ function WhitMapCard() {
                 endpoint={petition}
             />
             <MapUsers/>
-            <Card/>
-
 
         </div>
 

@@ -24,10 +24,11 @@ public class PointController {
 
     FileStorageService fileStorageService;
 
-    public PointController(  FileStorageService fileStorageService) {
+    public PointController(FileStorageService fileStorageService) {
 
         this.fileStorageService = fileStorageService;
     }
+
     public static final Logger LOGGER = LoggerFactory.getLogger(PointController.class);
 
     static {
@@ -42,6 +43,7 @@ public class PointController {
     @GetMapping(value = {"{name}"})
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public byte[] getImage(@PathVariable String name) {
+        LOGGER.info("запрос файла с именем: " + name);
         Resource image = fileStorageService.load(name);
         try {
             return image.getContentAsByteArray();
@@ -49,6 +51,7 @@ public class PointController {
             throw new RuntimeException(e);
         }
     }
+
     @Operation(
             summary = "Запрос на получение фото по /api/image/?name=имя файла",
             description = "На вход ждет имя файла"

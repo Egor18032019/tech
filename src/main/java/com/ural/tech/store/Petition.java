@@ -13,13 +13,14 @@ import java.time.Instant;
 @Setter
 public class Petition extends AbstractBaseEntity {
 
-
     @Column()
     String status;
     @Column()
     String topic;
     @Column()
     String description;
+    @Column()
+    String pointCoordinates;
     @Column()
     String urlImage;
 
@@ -41,4 +42,13 @@ public class Petition extends AbstractBaseEntity {
         this.description = description;
         this.urlImage = urlImage;
     }
+
+    public Petition(String status, String topic, String description, String pointCoordinates, String urlImage) {
+        this.status = status;
+        this.topic = topic;
+        this.description = description;
+        this.pointCoordinates = pointCoordinates;
+        this.urlImage = urlImage;
+    }
+
 }

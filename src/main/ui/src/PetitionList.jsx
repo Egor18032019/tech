@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {url, api, allPetition} from "./Const";
-import Petition from "./Petition";
+
 
 function PetitionList() {
     const [petitions, setPetition] = useState(null);
@@ -52,7 +52,6 @@ function PetitionList() {
 
         </div>
     )
-}
-;
+};
 
 export default PetitionList;

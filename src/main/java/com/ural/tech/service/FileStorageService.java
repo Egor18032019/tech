@@ -15,7 +15,6 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalTime;
 import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -77,6 +76,7 @@ public class FileStorageService implements FileStorageRepository {
 
     @Override
     public Resource load(String fileName) {
+        log.info("  Запрос файла с именем: " + fileName);
         Path file = path.resolve(fileName);
         try {
             Resource resource = new UrlResource(file.toUri());

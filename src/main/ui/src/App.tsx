@@ -8,14 +8,14 @@ import Contact from "./Contact";
 import {PointProvider, useContextMap} from "./PointReducer";
 import React, {useEffect, useState} from 'react';
 import Form from "./Form";
-import Petition from "./Petition";
+
 import BranchesMap from "./BranchesMap";
 
 import NewsList from "./NewsList";
 import MapUsers from "./MapUsers";
 import PetitionList from "./PetitionList";
 import AdminNewsList from "./AdminNewsList";
-import WhitMapCard from "./WithCardMap";
+import WithCardMap from "./WithCardMap";
 import WhitMapNews from "./WhitMapNews";
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
                 <Nav/>
                 <Routes>
                     <Route path="/" element={<NewsList/>}></Route>
-                    <Route path="/petition" element={<WhitMapCard
+                    <Route path="/petition" element={<WithCardMap
                         //todo вынести в константы  пути !!!
                     />}></Route>
 
@@ -43,7 +43,6 @@ function App() {
                     <Route path="/contact" element={<Contact/>}></Route>
                 </Routes>
             </BrowserRouter>
-
         </>
     );
 }

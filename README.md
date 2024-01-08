@@ -8,7 +8,16 @@
 1. Скачать
 2. Создайте файл с секретами `.env` (например, из файла образца `.env.example`)
 3. Зайти с помощью терминала/Windows power shell в папку проекта выполнить команду `docker compose up`
-
+или
+```shell
+docker run --name demo -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres -e POSTGRES_DB=demo -d postgres:11-alpine
+```
+```shell
+mvn -f pom.xml clean package -D  maven.test.skip=true
+```
+```shell
+java -jar target/tech-0.0.1-SNAPSHOT.jar --status=running
+```
 ## Usage
 
 В браузере зайти на сайт

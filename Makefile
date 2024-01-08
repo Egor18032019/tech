@@ -15,7 +15,7 @@ RUNNER_CMD ?= sh -c "env; sh"
 #RUNNER_CMD ?= sh -c ". .env && java -jar ${APP_JAR}"
 
 builder-shell:
-        docker run -it --rm -u `id -u`:`id -g` -v `pwd`:/root -w /root \
+        docker run -it --rm -u `id -u`:`id -g` -v `pwd` : /root -w /root \
                 -e HOME="/root" \
                 $(BUILDER_IMAGE) sh
 
