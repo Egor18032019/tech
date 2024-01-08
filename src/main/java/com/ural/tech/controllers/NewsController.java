@@ -12,10 +12,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.Optional;
 
 @Tag(name = "Создание новостей.(изменение)")
@@ -31,9 +34,15 @@ public class NewsController {
         this.fileStorageService = fileStorageService;
     }
 
+    public static final Logger LOGGER = LoggerFactory.getLogger(NewsController.class);
+
+    static {
+        LOGGER.info("Test start time:" + LocalTime.now());
+    }
+
     @Operation(
-            summary = "Создание обращения",
-            description = "Получение данных для создание обращения. Ждет на вход  описание проблемы и опционально фото"
+            summary = "Создание новости",
+            description = "Получение данных для создание новости. Ждет на вход  описание проблемы и опционально фото"
     )
     @PostMapping(value = EndPoint.great)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
@@ -43,15 +52,15 @@ public class NewsController {
             @RequestParam("end") String end,
 
             @RequestParam(value = "file", required = false) MultipartFile file) {
-        System.out.println("  @PostMapping(value = EndPoint.great)");
+
         News news;
         if (file != null && !file.isEmpty()) {
-
+            LOGGER.info("Сохранение файла");
             Path pathToImage = fileStorageService.save(file);
-            System.out.println("pathToImage " + pathToImage);
+            LOGGER.info("Сохранение новости в БД если есть картинка");
             news = newsService.saveNews(description, pathToImage, start, end);
         } else {
-
+            LOGGER.info("Сохранение новости в БД без картинки");
             news = newsService.saveNews(description, start, end);
         }
 

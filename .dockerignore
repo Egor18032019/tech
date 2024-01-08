@@ -28,3 +28,4 @@ Makefile*
 src/main/ui
 #appData
 dbData
+appData

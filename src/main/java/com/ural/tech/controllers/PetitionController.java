@@ -13,10 +13,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.Optional;
 
 @Tag(name = "Создание и обработка обращений.(изменение)")
@@ -31,7 +34,11 @@ public class PetitionController {
         this.petitionService = petitionService;
         this.fileStorageService = fileStorageService;
     }
+    public static final Logger LOGGER = LoggerFactory.getLogger(PetitionController.class);
 
+    static {
+        LOGGER.info("Test start time:" + LocalTime.now());
+    }
     @Operation(
             summary = "Создание обращения",
             description = "Получение данных для создание обращения. Ждет на вход тема, описание проблемы и опционально фото"
@@ -46,12 +53,12 @@ public class PetitionController {
 
         Petition petitionFromBD;
         if (file != null && !file.isEmpty()) {
-
+            LOGGER.info("Сохранение файла");
             Path pathToImage = fileStorageService.save(file);
-            System.out.println("pathToImage " + pathToImage);
+            LOGGER.info("Сохранение обращения в БД если есть картинка");
             petitionFromBD = petitionService.savePetition(status,topic, description, pathToImage);
         } else {
-
+            LOGGER.info("Сохранение обращения в БД без картинки");
             petitionFromBD = petitionService.savePetition(status,topic, description);
         }
 
