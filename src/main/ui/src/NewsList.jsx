@@ -44,10 +44,15 @@ function NewsList() {
                 {/* Отображение новостей */}
                 {news && news.map((i) => (
                     <li key={i.id}>
-                        <span>{i.status}</span>
-                        <span>{i.coordinates}</span>
-                        <span>{i.description}</span>
-                        <span>{i.createdAt}</span>
+                        <p>{i.description}</p>
+                         <p>
+                             <span>Начало: </span>
+                             <span>{i.start}</span>
+                                <br></br>
+                             <span>Конец: </span>
+                        <span>{i.end}</span>
+                        </p>
+                        <p>{i.createdAt}</p>
                         <img className={"img_card"} width={"300px"} src={"/api/" + i.pathToImage}/>
                     </li>
                 ))}

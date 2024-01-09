@@ -41,7 +41,7 @@ const MapUsers = () => {
     };
 //todo запрос на получение гео позиции
     const handleFindUser = async () => {
-            console.log("points " + points[0].pointCoordinates)
+
         setUserCoords(userCoords);
         if (setCoordinates) {
             console.log("setPoint " + userCoords)
