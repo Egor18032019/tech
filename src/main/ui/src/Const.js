@@ -1,14 +1,14 @@
-//const url = "http://localhost:8080";
- const url = "";
+const url = "http://localhost:8080";
+// const url = "";
 const point = "point";
 const petition = "/petition";
 const api = "/api";
 const news = "/news";
 const deleteNews = "/deleteNews";
 const allNews = "/allNews";
-const great = "/great";;
+const great = "/great";
+const all = "/all";
 const creatPoint = "/point";
-const allPetition = "/allPetition";;
 
 export {
     url,
@@ -18,8 +18,7 @@ export {
     allNews,
     api,
     creatPoint,
-    allPetition,
     deleteNews,
-    great
-
+    great,
+    all
 };

@@ -41,7 +41,7 @@ public class NewsController {
     public static final Logger LOGGER = LoggerFactory.getLogger(NewsController.class);
 
     static {
-        LOGGER.info("Test start time:" + LocalTime.now());
+        LOGGER.info("News Controller start time:" + LocalTime.now());
     }
 
     @Operation(
@@ -56,7 +56,7 @@ public class NewsController {
             @RequestParam("end") String end,
 
             @RequestParam(value = "file", required = false) MultipartFile file) {
-        registry.counter("news.total", "news", "create").increment();
+        registry.counter("news", "news", "create").increment();
         News news;
         if (file != null && !file.isEmpty()) {
             LOGGER.info("Сохранение файла");
@@ -83,7 +83,7 @@ public class NewsController {
     public AllNewsResponse allPointResponse(@Parameter(schema = @Schema(implementation = AllNewsResponse.class))
                                             @RequestParam(value = "limit", required = false) Optional<Integer> limit,
                                             @RequestParam(value = "offset", required = false) Optional<Integer> offset) {
-        registry.counter("news.total", "news", "all").increment();
+        registry.counter("news", "news", "visits").increment();
         return newsService.getAllNewsForResponse(limit, offset);
     }
 
@@ -94,7 +94,7 @@ public class NewsController {
     @DeleteMapping(value = {"{id}"})
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public NewsResponse deletePoint(@PathVariable String id) {
-        registry.counter("news.total", "news", "delete").increment();
+        registry.counter("news", "news", "delete").increment();
         newsService.delete(id);
         return new NewsResponse();
     }
