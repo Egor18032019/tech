@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {url, api, allNews} from "./Const";
+import {url, api, news as newEndPoint,allNews} from "./Const";
 import "./NewsList.scss";
 function NewsList() {
     const [news, setNews] = useState(null);
@@ -11,7 +11,7 @@ function NewsList() {
 
     const handleFindAllNews = async () => {
 
-        const response = await fetch(url + api + "/news" + allNews, {
+        const response = await fetch(url + api + newEndPoint + allNews, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

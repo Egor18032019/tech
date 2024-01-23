@@ -4,14 +4,14 @@ import Form from "./Form";
 import React from "react";
 import MapUsers from "./MapUsers";
 
-import {petition} from "./Const";
+import {great,petition} from "./Const";
 function WhitMapCard() {
 
     return (
 
         <div>
             <Form
-                endpoint={petition}
+                endpoint={petition + great}
             />
             <MapUsers/>
 

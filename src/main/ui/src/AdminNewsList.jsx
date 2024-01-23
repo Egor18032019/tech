@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from "react";
-import {url, api, allNews, deleteNews} from "./Const";
+import {url, api, allNews, deleteNews,news as newEndPoint} from "./Const";
 import "./AdminNewsList.scss";
 
 function AdminNewsList() {
     const [news, setNews] = useState(null);
 
     useEffect(() => {
-        console.log("NewsList")
+        console.log("AdminNewsList")
         handleFindAllNews()
         console.log(news)
     }, []);
 
     const handleFindAllNews = async () => {
 
-        const response = await fetch(url + api + "/news" + allNews, {
+        const response = await fetch(url + api + newEndPoint + allNews, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -30,7 +30,7 @@ function AdminNewsList() {
     };
     const handleDeletePoint = async (id) => {
 
-        const response = await fetch(url + api + "/news" + "/" + id, {
+        const response = await fetch(url + api + newEndPoint + "/" + id, {
             method: "Delete",
             headers: {
                 "Content-Type": "application/json",
@@ -38,8 +38,9 @@ function AdminNewsList() {
                 "Access-Control-Allow-Credentials": "true",
                 "Access-Control-Allow-Methods": "GET",
             }
-
         });
+
+         handleFindAllNews()
     }
 
 
@@ -64,12 +65,11 @@ function AdminNewsList() {
                         <span>{i.start}</span>
                         <span>{i.end}</span>
                         <span>{i.coordinates} Уралмаш</span>
-                        <span>РЭМП Эльмаш</span>
+                        <span>РЭМП </span>
                         <span>
                             <img className={"news-list_cell__img"} width={"100px"} src={"/api/" + i.pathToImage}
                                  alt={"фото"}/></span>
                         <span>
-                             <span>Категории</span>
                             <button
                                 onClick={(event) => {
                                     event.preventDefault()

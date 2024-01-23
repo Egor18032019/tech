@@ -2,7 +2,7 @@ import React, {useState, useRef, useContext, createContext} from "react";
 import {YMaps, Map, Placemark} from "@pbe/react-yandex-maps";
 
 import {useContextMap} from "./PointReducer";
-import {url} from "./Const";
+import {url,api,all,petition} from "./Const";
 
 const MapUsers = () => {
     const {setCoordinates, points, setPoint, setPoints, setOriginalPoints} = useContextMap();
@@ -15,7 +15,7 @@ const MapUsers = () => {
 
     const handleFindAllBranch = async () => {
 
-        const response = await fetch(url + "/api/allPetition", {
+        const response = await fetch(url + api+petition+all, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

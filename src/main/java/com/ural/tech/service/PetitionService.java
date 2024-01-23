@@ -78,4 +78,8 @@ public class PetitionService {
 
     }
 
+    public void delete(String id) {
+        Long idPetition = Long.valueOf(id);
+        petitionRepository.deleteById(idPetition);
+    }
 }

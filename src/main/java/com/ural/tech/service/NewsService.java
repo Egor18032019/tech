@@ -4,6 +4,7 @@ import com.ural.tech.schemas.AllNewsResponse;
 import com.ural.tech.schemas.NewsResponse;
 import com.ural.tech.store.News;
 import com.ural.tech.store.NewsRepository;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
@@ -14,9 +15,11 @@ import java.util.Optional;
 @Service()
 public class NewsService {
     NewsRepository newsRepository;
+    MeterRegistry registry;
 
-    public NewsService(NewsRepository newsRepository) {
+    public NewsService(NewsRepository newsRepository,MeterRegistry registry) {
         this.newsRepository = newsRepository;
+        this.registry = registry;
     }
 
     public News saveNews(String description, Path pathToImage, String start, String end) {
@@ -31,8 +34,8 @@ public class NewsService {
 
     public AllNewsResponse getAllNewsForResponse(Optional<Integer> limit, Optional<Integer> offset) {
         List<News> newsList = newsRepository.findAll();
-
         int realLimit = newsList.size();
+        registry.summary("news.total", "news",  "realLimit").record(realLimit);
 
         if (limit.isPresent()) {
             realLimit = limit.get();
