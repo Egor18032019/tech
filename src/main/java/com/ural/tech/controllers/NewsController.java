@@ -50,7 +50,7 @@ public class NewsController {
     )
     @PostMapping(value = EndPoint.great)
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public NewsResponse handleFileUpload(
+        public NewsResponse handleFileUpload(
             @RequestParam("description") String description,
             @RequestParam("start") String start,
             @RequestParam("end") String end,
