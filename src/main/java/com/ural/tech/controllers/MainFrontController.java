@@ -7,14 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class MainFrontController {
 
-    @RequestMapping({"/"})
+    @RequestMapping({"/","/petition","/contact"})
     public String loadUI() {
         System.out.println("loadUI");
         return "forward:/index.html";
     }
-//    @RequestMapping({"/auth"})
-//    public String loadLoginForm() {
-//        System.out.println("loadLoginForm");
-//        return "forward:/login.html";
-//    }
+
 }

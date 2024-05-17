@@ -1,10 +1,7 @@
 package com.ural.tech.service;
 
-import com.ural.tech.schemas.AllNewsResponse;
 import com.ural.tech.schemas.AllPetitionResponse;
-import com.ural.tech.schemas.NewsResponse;
 import com.ural.tech.schemas.PetitionResponse;
-import com.ural.tech.store.News;
 import com.ural.tech.store.Petition;
 import com.ural.tech.store.PetitionRepository;
 import com.ural.tech.utils.Status;
@@ -23,8 +20,8 @@ public class PetitionService {
         this.petitionRepository = petitionRepository;
     }
 
-    public Petition savePetition(Status status, String topic,String description, Path pathToImage) {
-        Petition petition = new Petition(status.getStatus(),topic, description, pathToImage.toString());
+    public Petition savePetition(Status status, String topic,String description,String pointCoordinates, Path pathToImage) {
+        Petition petition = new Petition(status.getStatus(),topic, description,pointCoordinates, pathToImage.toString());
         return petitionRepository.save(petition);
     }
 
@@ -72,7 +69,7 @@ public class PetitionService {
         for (int i = realOffset; i < realLimit; i++) {
             Petition point = list.get(i);
 
-            PetitionResponse response = new PetitionResponse(point.getId(), point.getStatus(), point.getDescription(), point.getCreatedAt(), point.getUrlImage());
+            PetitionResponse response = new PetitionResponse(point.getId(), point.getStatus(), point.getDescription(),point.getPointCoordinates(), point.getCreatedAt(), point.getUrlImage());
             responses.add(response);
         }
 
@@ -81,4 +78,8 @@ public class PetitionService {
 
     }
 
+    public void delete(String id) {
+        Long idPetition = Long.valueOf(id);
+        petitionRepository.deleteById(idPetition);
+    }
 }

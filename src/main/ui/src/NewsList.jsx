@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {url, api, allNews} from "./Const";
+import {url, api, news as newEndPoint,allNews} from "./Const";
 import "./NewsList.scss";
 function NewsList() {
     const [news, setNews] = useState(null);
@@ -11,7 +11,7 @@ function NewsList() {
 
     const handleFindAllNews = async () => {
 
-        const response = await fetch(url + api + "/news" + allNews, {
+        const response = await fetch(url + api + newEndPoint + allNews, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -44,10 +44,15 @@ function NewsList() {
                 {/* Отображение новостей */}
                 {news && news.map((i) => (
                     <li key={i.id}>
-                        <span>{i.status}</span>
-                        <span>{i.coordinates}</span>
-                        <span>{i.description}</span>
-                        <span>{i.createdAt}</span>
+                        <p>{i.description}</p>
+                         <p>
+                             <span>Начало: </span>
+                             <span>{i.start}</span>
+                                <br></br>
+                             <span>Конец: </span>
+                        <span>{i.end}</span>
+                        </p>
+                        <p>{i.createdAt}</p>
                         <img className={"img_card"} width={"300px"} src={"/api/" + i.pathToImage}/>
                     </li>
                 ))}

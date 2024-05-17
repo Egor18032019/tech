@@ -1,12 +1,11 @@
 import React, {useState} from "react";
-import "./Form.scss";
+import "./News.scss";
 import sendPost from "./ServiceCalls";
 import FormField from "./FormField";
 import {useContextMap} from "./PointReducer";
 import {news, great} from "./Const";
 
 const News = () => {
-    const {coordinates} = useContextMap();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [notification, setNotification] = useState({message: "", type: ""});
     const [image, setImage] = useState(null);
@@ -48,22 +47,15 @@ const News = () => {
         <div className="news-container">
             <form
                 onSubmit={handleSubmit}
-                className="upload-form"
+                className="news-form__upload"
                 encType="multipart/form-data"
             >
-                <div className="form-group">
-                    <label htmlFor={"pointCoordinates"}>{"Координаты точки:"}</label>
-                    <input type={"text"} id={"pointCoordinates"} name={"pointCoordinates"} className={"form-control"}
-                           value={coordinates} readOnly={true}/>
-                </div>
-
-
                 <FormField
                     label="Текст новости:"
                     type="text"
                     id="description"
                     name="description"
-                    className="form-control"
+                    className="news-form_control new-form_field"
                     value={""}
                     isDisabled={false}
                 />
@@ -73,7 +65,7 @@ const News = () => {
                     type="text"
                     id="start"
                     name="start"
-                    className="form-control"
+                    className="news-form_control"
                     value={""}
                     isDisabled={false}
                 />
@@ -82,7 +74,7 @@ const News = () => {
                     type="text"
                     id="end"
                     name="end"
-                    className="form-control"
+                    className="news-form_control"
                     value={""}
                     isDisabled={false}
                 />
@@ -107,29 +99,30 @@ const News = () => {
                     <label>Другое</label>
                 </div>
 
-                <div className="form-upload">
+                <div className="news-form-upload">
                     <input
                         label="Файл для загрузки:"
                         type="file"
                         id="file"
                         name="file"
-                        className="form-control"
+                        className="news-form_control"
                         onChange={(e) => _handlePhotoChange(e)}
                     />
 
                     <label htmlFor="images" className="ad-form__drop-zone">
                         Загрузить фото...
                     </label>
-                    <div className="form-group">
-                        <button type="submit" className="btn-upload" disabled={isSubmitting}>
+                    <div className="news-form-group">
+                        <button type="submit" className="news-btn__upload" disabled={isSubmitting}>
                             Отправить
                         </button>
                     </div>
                 </div>
             </form>
-            <div className="form__photo">
-                <img className="img_upload" src={`${image}`}/>
-                {/*<img className="img_upload"   src="https://th.bing.com/th/id/OIP.8ZewQ5pH3-DwDX3OKhpY2AAAAA?w=474&h=572&rs=1&pid=ImgDetMain"/>*/}
+            <div className="news-form__photo">
+                     {image && (
+                                <img className="news-img_upload"   src={`${image}`} />
+                                     )}
             </div>
             {notification.message && (
                 <div className={`notification ${notification.type}`}>

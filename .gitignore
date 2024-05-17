@@ -28,7 +28,7 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
+src/main/ui/build
 ### VS Code ###
 .vscode/
 
@@ -39,6 +39,6 @@ build/
 ## App
 .env
 docker-compose.override.yml
-fileStorage
+
 appData
 dbData

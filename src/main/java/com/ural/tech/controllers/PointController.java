@@ -1,90 +1,49 @@
 package com.ural.tech.controllers;
 
 
-import com.ural.tech.schemas.AllPointResponse;
-import com.ural.tech.schemas.PointRequest;
-import com.ural.tech.schemas.PointResponse;
 import com.ural.tech.service.FileStorageService;
-import com.ural.tech.service.PointService;
-import com.ural.tech.store.Points;
 import com.ural.tech.utils.EndPoint;
-import com.ural.tech.utils.Status;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
+import java.time.LocalTime;
 
 @Tag(name = "Создание и обработка заявок.(изменение)")
 @RestController
 @RequestMapping(EndPoint.api)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PointController {
-    PointService pointService;
+
     FileStorageService fileStorageService;
 
-    public PointController(PointService pointService, FileStorageService fileStorageService) {
-        this.pointService = pointService;
+    public PointController(FileStorageService fileStorageService) {
+
         this.fileStorageService = fileStorageService;
     }
 
-    @Operation(
-            summary = "Создание точки на карте",
-            description = "Получение данных для создание заявки. Ждет на вход координаты и описание проблемы и опционально файл"
-    )
-    @PostMapping(value = EndPoint.creatPoint)
-    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public PointResponse handleFileUpload(@RequestParam("pointCoordinates") String pointCoordinates,
-                                          @RequestParam("description") String description,
-                                          @RequestParam(value = "file", required = false) MultipartFile file) {
-        Status status = Status.GREAT;
-        PointRequest request = new PointRequest(pointCoordinates, description);
-        Points pointFromBD;
-        if (file != null && !file.isEmpty()) {
+    public static final Logger LOGGER = LoggerFactory.getLogger(PointController.class);
 
-            Path pathToImage = fileStorageService.save(file);
-            System.out.println("pathToImage " + pathToImage);
-            pointFromBD = pointService.save(status, request, pathToImage);
-        } else {
-
-            pointFromBD = pointService.save(status, request);
-        }
-
-        return new PointResponse(pointFromBD.getId(), status.toString(), pointFromBD.getPointCoordinates().split(","), pointFromBD.getDescription(), pointFromBD.getCreatedAt(), pointFromBD.getUrlImage());
-
+    static {
+        LOGGER.info("Test start time:" + LocalTime.now());
     }
 
-    @Operation(
-            summary = "Запрос на получение всех обращений",
-            description = "На вход ждет координаты пользователя, далее опционально лимит сколько всего обращений и офсет с какого обращения"
-
-    )
-    @GetMapping(value = EndPoint.all)
-    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public AllPointResponse allPointResponse(@Parameter(schema = @Schema(implementation = AllPointResponse.class))
-                                             @RequestParam(value = "coordinates", required = true) String coordinates,
-                                             @RequestParam(value = "limit", required = false) Optional<Integer> limit,
-                                             @RequestParam(value = "offset", required = false) Optional<Integer> offset) {
-
-        return pointService.getAllPointForResponse(coordinates, limit, offset);
-    }
 
     @Operation(
-            summary = "Запрос на получение фото обращения",
+            summary = "Запрос на получение фото по /api/имя файла ",
             description = "На вход ждет имя файла"
     )
     @GetMapping(value = {"{name}"})
     @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     public byte[] getImage(@PathVariable String name) {
+        LOGGER.info("запрос файла с именем: " + name);
         Resource image = fileStorageService.load(name);
         try {
             return image.getContentAsByteArray();
@@ -92,8 +51,9 @@ public class PointController {
             throw new RuntimeException(e);
         }
     }
+
     @Operation(
-            summary = "Запрос на получение фото обращения",
+            summary = "Запрос на получение фото по /api/image/?name=имя файла",
             description = "На вход ждет имя файла"
     )
     @GetMapping(value = EndPoint.image,
@@ -109,25 +69,4 @@ public class PointController {
     }
 
 
-    @Operation(
-            summary="Запрос на  изменение одной точки",
-            description = "На вход ждет Points"
-    )
-    @PostMapping(value = EndPoint.update)
-    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public PointResponse updatePoints(@RequestBody() Points point) {
-        pointService.updatePoint(point);
-        return new PointResponse();
-    }
-
-    @Operation(
-            summary="Запрос на удаление одной точки",
-            description = "На вход ждет id точки"
-    )
-    @DeleteMapping(value = {"{id}"})
-    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
-    public PointResponse deletePoint(@PathVariable String id) {
-        pointService.delete(id);
-        return new PointResponse();
-    }
 }

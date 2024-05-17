@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {url, api, allPetition} from "./Const";
-import Petition from "./Petition";
+import {url, api,petition,all} from "./Const";
+
 
 function PetitionList() {
     const [petitions, setPetition] = useState(null);
@@ -12,7 +12,7 @@ function PetitionList() {
 
     const handleFindAllPetition = async () => {
 
-        const response = await fetch(url + api + allPetition, {
+        const response = await fetch(url + api + petition +all, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -30,6 +30,20 @@ function PetitionList() {
         }
 
     };
+    const handleDeletePetition = async (id) => {
+
+        const response = await fetch(url + api + petition + "/" + id, {
+            method: "Delete",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Methods": "GET",
+            }
+        });
+
+         handleFindAllPetition()
+    }
 
 
     return (<div className="news-container">
@@ -43,7 +57,17 @@ function PetitionList() {
                         <span>{i.description}</span>
                         <span>{i.createdAt}</span>
                         <img className={"img_card"} width={"300px"} src={"/api/" + i.pathToImage}/>
-
+                        <span>
+                            <button
+                                onClick={(event) => {
+                                    event.preventDefault()
+                                    console.log(event)
+                                    console.log(i.id)
+                                    handleDeletePetition(i.id)
+                                    handleFindAllPetition()
+                                }}> удалить
+                            </button>
+                        </span>
                     </li>
                 ))}
             </ul>
@@ -52,7 +76,6 @@ function PetitionList() {
 
         </div>
     )
-}
-;
+};
 
 export default PetitionList;

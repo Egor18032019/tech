@@ -20,6 +20,8 @@ public class PetitionResponse {
     String status;
     @Schema(description = "Описание проблемы")
     String description; // "яма на дороге"
+     @Schema(description = "Описание проблемы")
+    String pointCoordinates; // "яма на дороге"
     @Schema(description = "Время создание/изменения обращение")
     Instant createdAt; //
     @Schema(description = "имя файла сохраненного на сервере")

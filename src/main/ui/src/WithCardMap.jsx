@@ -3,19 +3,17 @@ import Card from "./Card";
 import Form from "./Form";
 import React from "react";
 import MapUsers from "./MapUsers";
-import Petition from "./Petition";
-import {petition} from "./Const";
+
+import {great,petition} from "./Const";
 function WhitMapCard() {
 
     return (
 
         <div>
             <Form
-                endpoint={petition}
+                endpoint={petition + great}
             />
             <MapUsers/>
-            <Card/>
-
 
         </div>
 

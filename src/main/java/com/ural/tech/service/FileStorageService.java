@@ -21,10 +21,12 @@ import java.util.stream.Stream;
 
 @Service("fileStorageService")
 public class FileStorageService implements FileStorageRepository {
+
     static final Logger log =
             LoggerFactory.getLogger(FileStorageService.class);
     private final Path path = Paths.get(System.getProperty("user.dir") + "/fileStorage");
-//todo может фронту дать ендпонит с которого он будет тащить файл по названию? /src/main/resources/static/
+
+    //todo может фронту дать ендпонит с которого он будет тащить файл по названию? /src/main/resources/static/
     @Override
     public void init() {
         // при инициализации каталога в директории resources выдает ошибку
@@ -60,20 +62,21 @@ public class FileStorageService implements FileStorageRepository {
             }
             String newFileName = new String(text) + "." + extension;
 
+
+            log.info("Сохраняем файл" + multipartFile.getOriginalFilename() + " в папке " +this.path);
             Path newPath = Path.of(String.valueOf(this.path), newFileName);
             Files.copy(multipartFile.getInputStream(), newPath);
-            System.out.println(newPath.getFileName());
 
-            log.info("Сохраняем файл" + multipartFile.getOriginalFilename());
             return newPath.getFileName();
         } catch (IOException e) {
-            log.error("Невозможно сохранить файл" + multipartFile.getOriginalFilename());
-            throw new RuntimeException("Could not store this file. Error" + e.getMessage());
+            log.error("Невозможно сохранить файл: " + multipartFile.getOriginalFilename());
+            throw new RuntimeException("Could not store this file. Error " + e.getMessage());
         }
     }
 
     @Override
     public Resource load(String fileName) {
+        log.info("  Запрос файла с именем: " + fileName);
         Path file = path.resolve(fileName);
         try {
             Resource resource = new UrlResource(file.toUri());
@@ -103,7 +106,8 @@ public class FileStorageService implements FileStorageRepository {
 
     @Override
     public void clear() {
-        System.out.println("чистим хранилище");
+
+        log.warn("чистим хранилище");
         FileSystemUtils.deleteRecursively(path.toFile());
         //todo когда нужно чистить данные ?
     }
