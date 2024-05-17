@@ -19,7 +19,11 @@ mvn -f pom.xml clean package -D  maven.test.skip=true
 java -jar target/tech-0.0.1-SNAPSHOT.jar --status=running
 ```
 ```shell
+cp .env.example .env
+```
+```shell
 cd src/main/ui
+npm i
 npm run build
 rm -rf ../../../src/main/resources/static/
 cp -r build ../../../src/main/resources/static/
@@ -45,6 +49,9 @@ http://localhost:9999/actuator/prometheus
 - Добавить дизайн(футер,хедер и т.п.)
 ## бэкенд
  
- 
+     Создать новую задачу.
+```shell
+curl -i -X POST http://176.109.101.240:8080/api/news/great -H 'Content-Type: application/json' -d '{description":"All done !","start":"2024-03-08T14:27:40.523557414","end":"2024-03-08T14:27:40.523557414"}'
+```
  
 

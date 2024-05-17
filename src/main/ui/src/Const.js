@@ -1,5 +1,6 @@
 //const url = "http://localhost:8080";
- const url = "";
+const url = "http://176.109.101.240:8080";
+// const url = "";
 const point = "point";
 const petition = "/petition";
 const api = "/api";
