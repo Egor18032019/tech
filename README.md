@@ -23,8 +23,6 @@ cd src/main/ui
 npm run build
 rm -rf ../../../src/main/resources/static/
 cp -r build ../../../src/main/resources/static/
- 
-
 ```
 
 ## Usage
@@ -38,7 +36,6 @@ http://localhost:8080/
 
 * Метрики
 http://localhost:9999/actuator/prometheus
-
 
 # TODO
  
