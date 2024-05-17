@@ -29,13 +29,14 @@ cp -r build ../../../src/main/resources/static/
 
 ## Usage
 
-В браузере зайти на сайт
+* В браузере зайти на сайт
 http://localhost:8080/
- 
-Документация лежит тут http://localhost:8080/swagger-ui/index.html
+
+* Документация лежит тут http://localhost:8080/swagger-ui/index.html
 или http://localhost:8080/v3/api-docs
 или в виде файла openapi.yaml
 
+* Метрики
 http://localhost:9999/actuator/prometheus
 
 
