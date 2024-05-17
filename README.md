@@ -19,6 +19,9 @@ mvn -f pom.xml clean package -D  maven.test.skip=true
 java -jar target/tech-0.0.1-SNAPSHOT.jar --status=running
 ```
 ```shell
+cp .env.example .env
+```
+```shell
 cd src/main/ui
 npm i
 npm run build
