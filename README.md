@@ -20,11 +20,12 @@ java -jar target/tech-0.0.1-SNAPSHOT.jar --status=running
 ```
 ```shell
 cd src/main/ui
+npm i
 npm run build
 rm -rf ../../../src/main/resources/static/
 cp -r build ../../../src/main/resources/static/
 ```
-
+    
 ## Usage
 
 * В браузере зайти на сайт
